@@ -32,15 +32,15 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp">
         <Button
+            android:id="@+id/share_button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:gravity="center"
-            tools:text="@string/share_text"
-            android:id="@+id/share_button"
+            android:text="@string/share_text"
             android:drawableLeft="@android:drawable/ic_menu_share"
             android:paddingLeft="120dp"
-            android:paddingRight="120dp"/>
+            android:paddingRight="120dp" />
     </FrameLayout>
 
 </LinearLayout>
