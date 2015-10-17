@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
     <LinearLayout
@@ -11,7 +13,7 @@
             android:layout_height="wrap_content"
             android:gravity="center"
             android:layout_weight="1"
-            android:text="@string/test_text"
+            tools:text="@string/test_text"
             android:textColor="@android:color/black"
             android:textSize="@dimen/League"
             android:id="@+id/league_textview"/>
@@ -20,7 +22,7 @@
             android:layout_height="wrap_content"
             android:gravity="center"
             android:layout_weight="1"
-            android:text="@string/test_text"
+            tools:text="@string/test_text"
             android:textSize="@dimen/League"
             android:textColor="@android:color/black"
             android:id="@+id/matchday_textview"/>
@@ -30,15 +32,15 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp">
         <Button
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:gravity="center"
-        android:text="@string/share_text"
-        android:id="@+id/share_button"
-        android:drawableLeft="@android:drawable/ic_menu_share"
-        android:paddingLeft="120dp"
-        android:paddingRight="120dp"/>
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
+            tools:text="@string/share_text"
+            android:id="@+id/share_button"
+            android:drawableLeft="@android:drawable/ic_menu_share"
+            android:paddingLeft="120dp"
+            android:paddingRight="120dp"/>
     </FrameLayout>
 
 </LinearLayout>
