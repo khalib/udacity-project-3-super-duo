@@ -39,4 +39,8 @@
     <string name="share_text">Share</string>
     <string name="share_message"><xliff:g id="homeTeam">%1$s</xliff:g> <xliff:g id="score">%2$s</xliff:g> <xliff:g id="awayTeam">%3$s</xliff:g> #Football_Scores</string>
 
+    <!-- A11y -->
+    <string name="a11y_share_button">Share this match information</string>
+    <string name="a11y_home_team_image">Home team: <xliff:g id="team">%1$s</xliff:g></string>
+    <string name="a11y_away_team_image">Away team: <xliff:g id="team">%1$s</xliff:g></string>
 </resources>
