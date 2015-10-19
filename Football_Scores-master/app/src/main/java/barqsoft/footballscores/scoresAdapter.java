@@ -13,8 +13,7 @@ import android.widget.TextView;
 /**
  * Created by yehya khaled on 2/26/2015.
  */
-public class ScoresAdapter extends CursorAdapter
-{
+public class ScoresAdapter extends CursorAdapter {
 
     private final String LOG_TAG = ScoresAdapter.class.getSimpleName();
 
@@ -38,7 +37,7 @@ public class ScoresAdapter extends CursorAdapter
     public View newView(Context context, Cursor cursor, ViewGroup parent)
     {
         View mItem = LayoutInflater.from(context).inflate(R.layout.scores_list_item, parent, false);
-        ViewHolder mHolder = new ViewHolder(mItem);
+        ScoresViewHolder mHolder = new ScoresViewHolder(mItem);
         mItem.setTag(mHolder);
         //Log.v(FetchScoreTask.LOG_TAG,"new View inflated");
         return mItem;
@@ -47,23 +46,23 @@ public class ScoresAdapter extends CursorAdapter
     @Override
     public void bindView(View view, final Context context, Cursor cursor)
     {
-        final ViewHolder viewHolder = (ViewHolder) view.getTag();
+        final ScoresViewHolder scoresViewHolder = (ScoresViewHolder) view.getTag();
 
         // Load views.
-        viewHolder.homeName.setText(cursor.getString(COL_HOME));
-        viewHolder.awayName.setText(cursor.getString(COL_AWAY));
-        viewHolder.date.setText(cursor.getString(COL_MATCHTIME));
-        viewHolder.score.setText(Utilies.getScores(cursor.getInt(COL_HOME_GOALS), cursor.getInt(COL_AWAY_GOALS)));
-        viewHolder.matchId = cursor.getDouble(COL_ID);
+        scoresViewHolder.homeName.setText(cursor.getString(COL_HOME));
+        scoresViewHolder.awayName.setText(cursor.getString(COL_AWAY));
+        scoresViewHolder.date.setText(cursor.getString(COL_MATCHTIME));
+        scoresViewHolder.score.setText(Utilies.getScores(cursor.getInt(COL_HOME_GOALS), cursor.getInt(COL_AWAY_GOALS)));
+        scoresViewHolder.matchId = cursor.getDouble(COL_ID);
 
-        viewHolder.homeCrest.setImageResource(Utilies.getTeamCrestByTeamName(
+        scoresViewHolder.homeCrest.setImageResource(Utilies.getTeamCrestByTeamName(
                 cursor.getString(COL_HOME)));
-        viewHolder.homeCrest.setContentDescription(context.getString(R.string.a11y_home_team_image,
+        scoresViewHolder.homeCrest.setContentDescription(context.getString(R.string.a11y_home_team_image,
                 cursor.getString(COL_HOME)));
 
-        viewHolder.awayCrest.setImageResource(Utilies.getTeamCrestByTeamName(
+        scoresViewHolder.awayCrest.setImageResource(Utilies.getTeamCrestByTeamName(
                 cursor.getString(COL_AWAY)));
-        viewHolder.awayCrest.setContentDescription(context.getString(R.string.a11y_away_team_image,
+        scoresViewHolder.awayCrest.setContentDescription(context.getString(R.string.a11y_away_team_image,
                 cursor.getString(COL_AWAY)));
 
         //Log.v(FetchScoreTask.LOG_TAG,mHolder.home_name.getText() + " Vs. " + mHolder.away_name.getText() +" id " + String.valueOf(mHolder.match_id));
@@ -74,7 +73,7 @@ public class ScoresAdapter extends CursorAdapter
         View v = vi.inflate(R.layout.detail_fragment, null);
         ViewGroup container = (ViewGroup) view.findViewById(R.id.details_fragment_container);
 
-        if (viewHolder.matchId == detailMatchId) {
+        if (scoresViewHolder.matchId == detailMatchId) {
             //Log.v(FetchScoreTask.LOG_TAG,"will insert extraView");
 
             container.addView(v, 0, new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
@@ -95,9 +94,9 @@ public class ScoresAdapter extends CursorAdapter
                 {
                     // add Share Action.
                     String shareText = context.getString(R.string.share_message,
-                            viewHolder.homeName.getText(),
-                            viewHolder.score.getText(),
-                            viewHolder.awayName.getText());
+                            scoresViewHolder.homeName.getText(),
+                            scoresViewHolder.score.getText(),
+                            scoresViewHolder.awayName.getText());
 
                     context.startActivity(createShareIntent(shareText));
                 }

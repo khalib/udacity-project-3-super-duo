@@ -7,7 +7,7 @@ import android.widget.TextView;
 /**
  * Created by yehya khaled on 2/26/2015.
  */
-public class ViewHolder
+public class ScoresViewHolder
 {
 
     public TextView homeName;
@@ -18,7 +18,7 @@ public class ViewHolder
     public ImageView awayCrest;
     public double matchId;
 
-    public ViewHolder(View view) {
+    public ScoresViewHolder(View view) {
         homeName = (TextView) view.findViewById(R.id.home_name);
         awayName = (TextView) view.findViewById(R.id.away_name);
         score = (TextView) view.findViewById(R.id.score_textview);
