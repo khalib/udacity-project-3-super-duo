@@ -4,7 +4,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.support.v4.widget.CursorAdapter;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,10 +13,10 @@ import android.widget.TextView;
 /**
  * Created by yehya khaled on 2/26/2015.
  */
-public class scoresAdapter extends CursorAdapter
+public class ScoresAdapter extends CursorAdapter
 {
 
-    private final String LOG_TAG = scoresAdapter.class.getSimpleName();
+    private final String LOG_TAG = ScoresAdapter.class.getSimpleName();
 
     public static final int COL_HOME = 3;
     public static final int COL_AWAY = 4;
@@ -30,7 +29,7 @@ public class scoresAdapter extends CursorAdapter
     public static final int COL_MATCHTIME = 2;
     public double detailMatchId = 0;
 
-    public scoresAdapter(Context context, Cursor cursor, int flags)
+    public ScoresAdapter(Context context, Cursor cursor, int flags)
     {
         super(context, cursor, flags);
     }

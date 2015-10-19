@@ -23,7 +23,7 @@ public class MainScreenFragment extends Fragment implements LoaderManager.Loader
 
     private final String LOG_TAG = MainScreenFragment.class.getSimpleName();
 
-    public scoresAdapter mAdapter;
+    public ScoresAdapter mAdapter;
     public static final int SCORES_LOADER = 0;
     private String[] fragmentdate = new String[1];
     private int lastSelectedItem = -1;
@@ -51,7 +51,7 @@ public class MainScreenFragment extends Fragment implements LoaderManager.Loader
 
         View rootView = inflater.inflate(R.layout.fragment_main, container, false);
         final ListView scoreList = (ListView) rootView.findViewById(R.id.scores_list);
-        mAdapter = new scoresAdapter(getActivity(), null, 0);
+        mAdapter = new ScoresAdapter(getActivity(), null, 0);
         mAdapter.detailMatchId = MainActivity.selectedMatchId;
 
         scoreList.setAdapter(mAdapter);
