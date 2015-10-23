@@ -21,6 +21,7 @@
     <string name="final_text">Final</string>
     <string name="about">About</string>
     <string name="title_activity_about">AboutActivity</string>
+    <string name="empty_scores_list">No scores for today.</string>
     <string name="about_text">
         This Application get Football Matches Score for the Premier League,Seria A,Bundesliga,Primera Division
         and the Uefa Champions League.

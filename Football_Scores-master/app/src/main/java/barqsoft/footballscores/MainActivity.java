@@ -16,7 +16,7 @@ public class MainActivity extends ActionBarActivity
     public static int currentFragment = 2;
 
     private final String SAVE_TAG = "Save Test";
-    private PagerFragment my_main;
+    private PagerFragment mMyMain;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,9 +25,9 @@ public class MainActivity extends ActionBarActivity
         setContentView(R.layout.activity_main);
         Log.d(LOG_TAG, "Reached MainActivity onCreate");
         if (savedInstanceState == null) {
-            my_main = new PagerFragment();
+            mMyMain = new PagerFragment();
             getSupportFragmentManager().beginTransaction()
-                    .add(R.id.container, my_main)
+                    .add(R.id.container, mMyMain)
                     .commit();
         }
     }
@@ -61,12 +61,12 @@ public class MainActivity extends ActionBarActivity
     protected void onSaveInstanceState(Bundle outState)
     {
         Log.v(SAVE_TAG, "will save");
-        Log.v(SAVE_TAG, "fragment: "+String.valueOf(my_main.mPagerHandler.getCurrentItem()));
-        Log.v(SAVE_TAG, "selected id: "+selectedMatchId);
+        Log.v(SAVE_TAG, "fragment: "+String.valueOf(mMyMain.mPagerHandler.getCurrentItem()));
+        Log.v(SAVE_TAG, "selected id: "+ selectedMatchId);
 
-        outState.putInt("Pager_Current",my_main.mPagerHandler.getCurrentItem());
-        outState.putInt("Selected_match",selectedMatchId);
-        getSupportFragmentManager().putFragment(outState,"my_main",my_main);
+        outState.putInt("Pager_Current", mMyMain.mPagerHandler.getCurrentItem());
+        outState.putInt("Selected_match", selectedMatchId);
+        getSupportFragmentManager().putFragment(outState, "mMyMain", mMyMain);
         super.onSaveInstanceState(outState);
     }
 
@@ -79,7 +79,7 @@ public class MainActivity extends ActionBarActivity
 
         currentFragment = savedInstanceState.getInt("Pager_Current");
         selectedMatchId = savedInstanceState.getInt("Selected_match");
-        my_main = (PagerFragment) getSupportFragmentManager().getFragment(savedInstanceState,"my_main");
+        mMyMain = (PagerFragment) getSupportFragmentManager().getFragment(savedInstanceState, "mMyMain");
         super.onRestoreInstanceState(savedInstanceState);
     }
 

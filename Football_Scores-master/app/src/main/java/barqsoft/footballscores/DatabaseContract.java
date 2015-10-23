@@ -9,10 +9,11 @@ import android.provider.BaseColumns;
  */
 public class DatabaseContract
 {
+
     public static final String SCORES_TABLE = "scores_table";
     public static final class scores_table implements BaseColumns
     {
-        //Table data
+        // Table data
         public static final String LEAGUE_COL = "league";
         public static final String DATE_COL = "date";
         public static final String TIME_COL = "time";
@@ -26,7 +27,7 @@ public class DatabaseContract
         //public static Uri SCORES_CONTENT_URI = BASE_CONTENT_URI.buildUpon().appendPath(PATH)
                 //.build();
 
-        //Types
+        // Types
         public static final String CONTENT_TYPE =
                 ContentResolver.CURSOR_DIR_BASE_TYPE + "/" + CONTENT_AUTHORITY + "/" + PATH;
         public static final String CONTENT_ITEM_TYPE =
@@ -45,8 +46,10 @@ public class DatabaseContract
             return BASE_CONTENT_URI.buildUpon().appendPath("date").build();
         }
     }
-    //URI data
+
+    // URI data
     public static final String CONTENT_AUTHORITY = "barqsoft.footballscores";
     public static final String PATH = "scores";
-    public static Uri BASE_CONTENT_URI = Uri.parse("content://"+CONTENT_AUTHORITY);
+    public static Uri BASE_CONTENT_URI = Uri.parse("content://" + CONTENT_AUTHORITY);
+
 }
