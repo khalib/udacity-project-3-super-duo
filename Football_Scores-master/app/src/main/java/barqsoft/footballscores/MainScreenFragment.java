@@ -11,6 +11,7 @@ import android.support.v4.content.Loader;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -73,7 +74,7 @@ public class MainScreenFragment extends Fragment implements LoaderManager.Loader
         // Set the layout manager
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
-        mRecyclerView.setHasFixedSize(true);
+//        mRecyclerView.setHasFixedSize(true);
 
 //        mScoresAdapter = new ScoresAdapter(getActivity(), null, 0);
 
@@ -81,8 +82,11 @@ public class MainScreenFragment extends Fragment implements LoaderManager.Loader
         // it's attached to.
         mScoresAdapter = new ScoresAdapter(getActivity(), new ScoresAdapter.ScoresAdapterOnClickHandler() {
             @Override
-            public void onClick(Long date, ScoresAdapter.ScoresAdapterOnClickHandler vh) {
-
+            public void onClick(Double matchId, ScoresViewHolder viewHolder) {
+                Log.v(LOG_TAG, "MainScreenFragment: CLICK");
+                mScoresAdapter.detailMatchId = viewHolder.matchId;
+                MainActivity.selectedMatchId = (int) viewHolder.matchId;
+                mScoresAdapter.notifyDataSetChanged();
             }
         }, emptyView, mChoiceMode);
 
@@ -93,7 +97,7 @@ public class MainScreenFragment extends Fragment implements LoaderManager.Loader
         // specify an adapter.
         mRecyclerView.setAdapter(mScoresAdapter);
 
-//        scoreList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+//        scoreList.ScoresViewHolder(new AdapterView.OnItemClickListener() {
 //            @Override
 //            public void onItemClick(AdapterView<?> parent, View view, int position, long id)
 //            {

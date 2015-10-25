@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,6 +17,8 @@ import android.widget.TextView;
 public class ScoresAdapter extends RecyclerView.Adapter<ScoresViewHolder> {
 
     private final String LOG_TAG = ScoresAdapter.class.getSimpleName();
+
+    private View mView;
 
     public static final int COL_HOME = 3;
     public static final int COL_AWAY = 4;
@@ -43,8 +46,10 @@ public class ScoresAdapter extends RecyclerView.Adapter<ScoresViewHolder> {
         mItemChoiceManager.setChoiceMode(choiceMode);
     }
 
-    public static interface ScoresAdapterOnClickHandler {
-        void onClick(Long date, ScoresAdapterOnClickHandler vh);
+    public static interface ScoresAdapterOnClickHandler
+    {
+//        void onClick(Double matchId, ScoresAdapterOnClickHandler onClickHandler);
+        void onClick(Double matchId, ScoresViewHolder viewHolder);
     }
 
     @Override
@@ -53,7 +58,7 @@ public class ScoresAdapter extends RecyclerView.Adapter<ScoresViewHolder> {
             View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.scores_list_item, parent, false);
             view.setFocusable(true);
 
-            return new ScoresViewHolder(view);
+            return new ScoresViewHolder(view, mClickHandler);
         } else {
             throw new RuntimeException("Not bound by RecyclerView");
         }
@@ -66,6 +71,54 @@ public class ScoresAdapter extends RecyclerView.Adapter<ScoresViewHolder> {
         // Load views.
         scoresViewHolder.homeName.setText(mCursor.getString(COL_HOME));
         scoresViewHolder.awayName.setText(mCursor.getString(COL_AWAY));
+        scoresViewHolder.date.setText(mCursor.getString(COL_MATCHTIME));
+        scoresViewHolder.score.setText(Utilies.getScores(mCursor.getInt(COL_HOME_GOALS), mCursor.getInt(COL_AWAY_GOALS)));
+        scoresViewHolder.matchId = mCursor.getDouble(COL_ID);
+
+        scoresViewHolder.homeCrest.setImageResource(Utilies.getTeamCrestByTeamName(
+                mCursor.getString(COL_HOME)));
+        scoresViewHolder.homeCrest.setContentDescription(mContext.getString(R.string.a11y_home_team_image,
+                mCursor.getString(COL_HOME)));
+
+        scoresViewHolder.awayCrest.setImageResource(Utilies.getTeamCrestByTeamName(
+                mCursor.getString(COL_AWAY)));
+        scoresViewHolder.awayCrest.setContentDescription(mContext.getString(R.string.a11y_away_team_image,
+                mCursor.getString(COL_AWAY)));
+
+        LayoutInflater vi = (LayoutInflater) mContext.getApplicationContext()
+                .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        View v = vi.inflate(R.layout.detail_fragment, null);
+
+        if (scoresViewHolder.matchId == detailMatchId) {
+            scoresViewHolder.shareFrame.addView(v, 0, new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
+                    ViewGroup.LayoutParams.MATCH_PARENT));
+
+            TextView matchDay = (TextView) v.findViewById(R.id.matchday_textview);
+            matchDay.setText(Utilies.getMatchDay(mCursor.getInt(COL_MATCHDAY),
+                    mCursor.getInt(COL_LEAGUE)));
+
+            TextView league = (TextView) v.findViewById(R.id.league_textview);
+            league.setText(Utilies.getLeague(mCursor.getInt(COL_LEAGUE)));
+
+            Button shareButton = (Button) v.findViewById(R.id.share_button);
+            shareButton.setContentDescription(mContext.getString(R.string.a11y_share_button));
+            shareButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v)
+                {
+                    // add Share Action.
+//                    String shareText = mContext.getString(R.string.share_message,
+//                            scoresViewHolder.homeName.getText(),
+//                            scoresViewHolder.score.getText(),
+//                            scoresViewHolder.awayName.getText());
+
+                    String shareText = "This is the share text";
+                    mContext.startActivity(createShareIntent(shareText));
+                }
+            });
+        } else {
+            scoresViewHolder.shareFrame.removeAllViews();
+        }
     }
 
     @Override
@@ -153,11 +206,7 @@ public class ScoresAdapter extends RecyclerView.Adapter<ScoresViewHolder> {
     }
     */
 
-    /**
-     *
-     *
-     * @param newCursor
-     */
+    // added from sunshine
     public void swapCursor(Cursor newCursor) {
         mCursor = newCursor;
         notifyDataSetChanged();
