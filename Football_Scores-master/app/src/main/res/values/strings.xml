@@ -44,4 +44,7 @@
     <string name="a11y_share_button">Share this match information</string>
     <string name="a11y_home_team_image">Home team: <xliff:g id="team">%1$s</xliff:g></string>
     <string name="a11y_away_team_image">Away team: <xliff:g id="team">%1$s</xliff:g></string>
+
+    <!-- Widgets -->
+    <string name="title_widget_collection">Scores</string>
 </resources>
