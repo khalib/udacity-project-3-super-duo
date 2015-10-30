@@ -47,14 +47,12 @@ public class MainScreenFragment extends Fragment implements LoaderManager.Loader
         mChoiceMode = AbsListView.CHOICE_MODE_NONE;
     }
 
-    private void update_scores()
-    {
+    private void update_scores() {
         Intent service_start = new Intent(getActivity(), ScoresFetchService.class);
         getActivity().startService(service_start);
     }
 
-    public void setFragmentDate(String date)
-    {
+    public void setFragmentDate(String date) {
         fragmentdate[0] = date;
     }
 
@@ -112,15 +110,13 @@ public class MainScreenFragment extends Fragment implements LoaderManager.Loader
     }
 
     @Override
-    public Loader<Cursor> onCreateLoader(int i, Bundle bundle)
-    {
-        return new CursorLoader(getActivity(),DatabaseContract.scores_table.buildScoreWithDate(),
-                null,null,fragmentdate,null);
+    public Loader<Cursor> onCreateLoader(int i, Bundle bundle) {
+        return new CursorLoader(getActivity(), DatabaseContract.ScoreEntry.buildScoreWithDate(),
+                null, null, fragmentdate, null);
     }
 
     @Override
-    public void onLoadFinished(Loader<Cursor> cursorLoader, Cursor cursor)
-    {
+    public void onLoadFinished(Loader<Cursor> cursorLoader, Cursor cursor) {
         //Log.v(FetchScoreTask.LOG_TAG,"loader finished");
         //cursor.moveToFirst();
         /*
@@ -144,8 +140,7 @@ public class MainScreenFragment extends Fragment implements LoaderManager.Loader
     }
 
     @Override
-    public void onLoaderReset(Loader<Cursor> cursorLoader)
-    {
+    public void onLoaderReset(Loader<Cursor> cursorLoader) {
         mScoresAdapter.swapCursor(null);
     }
 
