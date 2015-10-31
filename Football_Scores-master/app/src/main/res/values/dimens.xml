@@ -17,4 +17,5 @@
     <dimen name="widget_collection_default_height">180dp</dimen>
     <dimen name="widget_collection_min_resize_width">220dp</dimen>
     <dimen name="widget_collection_min_resize_height">@dimen/widget_collection_default_height</dimen>
+    <dimen name="widget_collection_text_size">24dp</dimen>
 </resources>

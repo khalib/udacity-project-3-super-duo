@@ -46,5 +46,5 @@
     <string name="a11y_away_team_image">Away team: <xliff:g id="team">%1$s</xliff:g></string>
 
     <!-- Widgets -->
-    <string name="title_widget_collection">Scores</string>
+    <string name="widget_title_collection">Today\'s Scores</string>
 </resources>

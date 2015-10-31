@@ -127,11 +127,18 @@ public class ScoresWidgetRemoteViewsService extends RemoteViewsService {
 //                    return null;
 //                }
 
-                Log.v(LOG_TAG, "RemoteViews RemoteViews RemoteViews RemoteViews RemoteViews RemoteViews ");
                 RemoteViews remoteViews = new RemoteViews(getPackageName(),
                         R.layout.widget_collection_list_item);
 
-                remoteViews.setTextViewText(R.id.widget_test_textview, "yo yo yo");
+                Log.v(LOG_TAG, "INDEX_SCORE_HOME_TEAM: " + data.getString(INDEX_SCORE_HOME_TEAM));
+                Log.v(LOG_TAG, "INDEX_SCORE_AWAY_TEAM: " + data.getString(INDEX_SCORE_AWAY_TEAM));
+                Log.v(LOG_TAG, "INDEX_SCORE_HOME_GOALS: " + data.getString(INDEX_SCORE_HOME_GOALS));
+                Log.v(LOG_TAG, "INDEX_SCORE_AWAY_GOALS: " + data.getString(INDEX_SCORE_AWAY_GOALS));
+
+                remoteViews.setTextViewText(R.id.widget_home_team_textview, data.getString(INDEX_SCORE_HOME_TEAM));
+                remoteViews.setTextViewText(R.id.widget_home_score_textview, data.getString(INDEX_SCORE_HOME_GOALS));
+                remoteViews.setTextViewText(R.id.widget_away_team_textview, data.getString(INDEX_SCORE_AWAY_TEAM));
+                remoteViews.setTextViewText(R.id.widget_away_score_textview, data.getString(INDEX_SCORE_AWAY_GOALS));
 
                 return remoteViews;
             }
@@ -172,7 +179,7 @@ public class ScoresWidgetRemoteViewsService extends RemoteViewsService {
             private void setRemoteContentDescription(RemoteViews views, String description) {
                 Log.v(LOG_TAG, "===== setRemoteContentDescription()");
 
-                views.setContentDescription(R.id.widget_icon, description);
+//                views.setContentDescription(R.id.widget_icon, description);
             }
         };
     }
