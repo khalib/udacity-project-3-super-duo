@@ -8,6 +8,7 @@ import android.os.Binder;
 import android.os.Build;
 import android.provider.ContactsContract;
 import android.util.Log;
+import android.view.View;
 import android.widget.Adapter;
 import android.widget.AdapterView;
 import android.widget.RemoteViews;

@@ -39,21 +39,23 @@
         android:layout_weight="1"
         android:background="@android:color/white">
 
+        <TextView
+            android:id="@+id/widget_empty"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="top"
+            android:fontFamily="sans-serif-condensed"
+            android:textAppearance="?android:textAppearanceLarge"
+            android:text="@string/empty_scores_list"
+            android:textColor="@color/dark_grey"
+            android:padding="@dimen/abc_button_padding_horizontal_material" />
+
         <ListView
             android:id="@+id/widget_list"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             style="@style/FootballListView"
             tools:listitem="@layout/widget_collection_list_item"/>
-
-        <TextView
-            android:id="@+id/widget_empty"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center"
-            android:fontFamily="sans-serif-condensed"
-            android:textAppearance="?android:textAppearanceLarge"
-            android:text="@string/empty_scores_list"/>
     </FrameLayout>
 
 </LinearLayout>
