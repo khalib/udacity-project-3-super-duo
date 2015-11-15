@@ -6,10 +6,7 @@ import android.database.Cursor;
 import android.net.Uri;
 import android.os.Binder;
 import android.os.Build;
-import android.provider.ContactsContract;
 import android.util.Log;
-import android.view.View;
-import android.widget.Adapter;
 import android.widget.AdapterView;
 import android.widget.RemoteViews;
 import android.widget.RemoteViewsService;
@@ -91,7 +88,6 @@ public class ScoresWidgetRemoteViewsService extends RemoteViewsService {
                         DatabaseContract.ScoreEntry.DATE_COL + " ASC");
 
                 Log.v(LOG_TAG, "DatabaseContract.ScoreEntry.DATE_COL: " + DatabaseContract.ScoreEntry.DATE_COL);
-                Log.v(LOG_TAG, "getCount(): " + Integer.toString(data.getCount()));
 
                 Binder.restoreCallingIdentity(identityToken);
             }
@@ -135,11 +131,16 @@ public class ScoresWidgetRemoteViewsService extends RemoteViewsService {
                 Log.v(LOG_TAG, "INDEX_SCORE_AWAY_TEAM: " + data.getString(INDEX_SCORE_AWAY_TEAM));
                 Log.v(LOG_TAG, "INDEX_SCORE_HOME_GOALS: " + data.getString(INDEX_SCORE_HOME_GOALS));
                 Log.v(LOG_TAG, "INDEX_SCORE_AWAY_GOALS: " + data.getString(INDEX_SCORE_AWAY_GOALS));
+                Log.v(LOG_TAG, "INDEX_SCORE_DATE: " + data.getString(INDEX_SCORE_DATE));
+                Log.v(LOG_TAG, "INDEX_SCORE_TIME: " + data.getString(INDEX_SCORE_TIME));
+
+                String homeScore = data.getString(INDEX_SCORE_HOME_GOALS).equals("-1") ? data.getString(INDEX_SCORE_TIME) : data.getString(INDEX_SCORE_HOME_GOALS);
+                String awayScore = data.getString(INDEX_SCORE_AWAY_GOALS).equals("-1") ? "" : data.getString(INDEX_SCORE_AWAY_GOALS);
 
                 remoteViews.setTextViewText(R.id.widget_home_team_textview, data.getString(INDEX_SCORE_HOME_TEAM));
-                remoteViews.setTextViewText(R.id.widget_home_score_textview, data.getString(INDEX_SCORE_HOME_GOALS));
+                remoteViews.setTextViewText(R.id.widget_home_score_textview, homeScore);
                 remoteViews.setTextViewText(R.id.widget_away_team_textview, data.getString(INDEX_SCORE_AWAY_TEAM));
-                remoteViews.setTextViewText(R.id.widget_away_score_textview, data.getString(INDEX_SCORE_AWAY_GOALS));
+                remoteViews.setTextViewText(R.id.widget_away_score_textview, awayScore);
 
                 return remoteViews;
             }

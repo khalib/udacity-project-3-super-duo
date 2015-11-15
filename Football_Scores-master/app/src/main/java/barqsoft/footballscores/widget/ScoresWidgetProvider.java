@@ -6,9 +6,12 @@ import android.appwidget.AppWidgetManager;
 import android.appwidget.AppWidgetProvider;
 import android.content.Context;
 import android.content.Intent;
+import android.database.Cursor;
 import android.os.Build;
 import android.support.annotation.NonNull;
 import android.support.v4.app.TaskStackBuilder;
+import android.util.Log;
+import android.view.View;
 import android.widget.RemoteViews;
 
 import barqsoft.footballscores.MainActivity;
@@ -25,7 +28,6 @@ public class ScoresWidgetProvider extends AppWidgetProvider {
     @Override
     public void onReceive(Context context, Intent intent) {
         super.onReceive(context, intent);
-
     }
 
     @Override
@@ -52,7 +54,8 @@ public class ScoresWidgetProvider extends AppWidgetProvider {
                     .addNextIntentWithParentStack(clickIntentTemplate)
                     .getPendingIntent(0, PendingIntent.FLAG_UPDATE_CURRENT);
             remoteViews.setPendingIntentTemplate(R.id.widget_list, clickPendingIntentTemplate);
-//            remoteViews.setEmptyView(R.id.widget_list, R.id.widget_empty);
+
+            remoteViews.setEmptyView(R.id.widget_list, R.id.widget_empty);
 
             // Tell the AppWidgetManager to perform an update on the current app widget.
             appWidgetManager.updateAppWidget(appWidgetId, remoteViews);

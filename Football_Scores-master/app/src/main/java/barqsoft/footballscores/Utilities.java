@@ -1,35 +1,46 @@
 package barqsoft.footballscores;
 
+import android.util.Log;
+
+import barqsoft.footballscores.service.ScoresFetchService;
+
 /**
  * Created by yehya khaled on 3/3/2015.
  */
-public class Utilies
-{
+public class Utilities {
 
-    private final String LOG_TAG = Utilies.class.getSimpleName();
+    private static final String LOG_TAG = Utilities.class.getSimpleName();
 
-    public static final int SERIE_A = 357;
-    public static final int PREMIER_LEGAUE = 354;
-    public static final int CHAMPIONS_LEAGUE = 362;
-    public static final int PRIMERA_DIVISION = 358;
-    public static final int BUNDESLIGA = 351;
+//    public static final int SERIE_A = 357;
+//    public static final int PREMIER_LEGAUE = 354;
+//    public static final int CHAMPIONS_LEAGUE = 362;
+//    public static final int PRIMERA_DIVISION = 358;
+//    public static final int BUNDESLIGA = 351;
 
-    public static String getLeague(int league_num)
-    {
-        switch (league_num) {
-            case SERIE_A :
+    public static String getLeague(int leagueNum) {
+        Log.v(LOG_TAG, "===== getLeague()");
+        Log.v(LOG_TAG, "leagueNum: " + leagueNum);
+        
+        switch (leagueNum) {
+            case ScoresFetchService.SERIE_A:
                 return "Seria A";
 
-            case PREMIER_LEGAUE :
+            case ScoresFetchService.PREMIER_LEAGUE:
                 return "Premier League";
 
-            case CHAMPIONS_LEAGUE :
+            case ScoresFetchService.CHAMPIONS_LEAGUE:
                 return "UEFA Champions League";
 
-            case PRIMERA_DIVISION :
+            case ScoresFetchService.PRIMERA_DIVISION:
                 return "Primera Division";
 
-            case BUNDESLIGA :
+            case ScoresFetchService.BUNDESLIGA1:
+                return "Bundesliga";
+
+            case ScoresFetchService.BUNDESLIGA2:
+                return "Bundesliga";
+
+            case ScoresFetchService.BUNDESLIGA3:
                 return "Bundesliga";
 
             default:
@@ -37,9 +48,8 @@ public class Utilies
         }
     }
 
-    public static String getMatchDay(int match_day,int league_num)
-    {
-        if (league_num == CHAMPIONS_LEAGUE) {
+    public static String getMatchDay(int match_day,int leagueNum) {
+        if (leagueNum == ScoresFetchService.CHAMPIONS_LEAGUE) {
             if (match_day <= 6) {
                 return "Group Stages, Matchday : 6";
             } else if (match_day == 7 || match_day == 8) {
@@ -56,8 +66,7 @@ public class Utilies
         }
     }
 
-    public static String getScores(int home_goals,int awaygoals)
-    {
+    public static String getScores(int home_goals,int awaygoals) {
         if (home_goals < 0 || awaygoals < 0) {
             return " - ";
         } else {
@@ -65,8 +74,7 @@ public class Utilies
         }
     }
 
-    public static int getTeamCrestByTeamName (String teamname)
-    {
+    public static int getTeamCrestByTeamName (String teamname) {
         if (teamname==null) {
             return R.drawable.no_icon;
         }

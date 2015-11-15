@@ -21,7 +21,7 @@
                 android:layout_height="wrap_content"
                 android:contentDescription="@string/app_name"
                 android:layout_gravity="center"
-                android:paddingRight="@dimen/abc_button_padding_horizontal_material"
+                android:paddingRight="10dp"
                 android:paddingLeft="@dimen/abc_button_padding_horizontal_material"
                 android:src="@drawable/ic_launcher" />
             <TextView
@@ -40,6 +40,10 @@
         android:layout_weight="1"
         android:background="@android:color/white">
 
+        <!--
+        android:id="@+id/widget_empty"
+        android:id="@android:id/empty"
+        -->
         <TextView
             android:id="@+id/widget_empty"
             android:layout_width="match_parent"

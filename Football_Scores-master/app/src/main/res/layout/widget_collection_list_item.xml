@@ -42,7 +42,7 @@
             android:gravity="center_vertical"
             android:layout_weight="3"
             android:textSize="@dimen/abc_text_size_subhead_material"
-            tools:text="Home Team"/>
+            tools:text="Home Team" />
 
         <TextView
             android:id="@+id/widget_home_score_textview"

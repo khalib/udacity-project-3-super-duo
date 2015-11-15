@@ -4,7 +4,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -70,15 +69,15 @@ public class ScoresAdapter extends RecyclerView.Adapter<ScoresViewHolder> {
         viewHolder.homeName.setText(mCursor.getString(COL_HOME));
         viewHolder.awayName.setText(mCursor.getString(COL_AWAY));
         viewHolder.date.setText(mCursor.getString(COL_MATCHTIME));
-        viewHolder.score.setText(Utilies.getScores(mCursor.getInt(COL_HOME_GOALS), mCursor.getInt(COL_AWAY_GOALS)));
+        viewHolder.score.setText(Utilities.getScores(mCursor.getInt(COL_HOME_GOALS), mCursor.getInt(COL_AWAY_GOALS)));
         viewHolder.matchId = mCursor.getDouble(COL_ID);
 
-        viewHolder.homeCrest.setImageResource(Utilies.getTeamCrestByTeamName(
+        viewHolder.homeCrest.setImageResource(Utilities.getTeamCrestByTeamName(
                 mCursor.getString(COL_HOME)));
         viewHolder.homeCrest.setContentDescription(mContext.getString(R.string.a11y_home_team_image,
                 mCursor.getString(COL_HOME)));
 
-        viewHolder.awayCrest.setImageResource(Utilies.getTeamCrestByTeamName(
+        viewHolder.awayCrest.setImageResource(Utilities.getTeamCrestByTeamName(
                 mCursor.getString(COL_AWAY)));
         viewHolder.awayCrest.setContentDescription(mContext.getString(R.string.a11y_away_team_image,
                 mCursor.getString(COL_AWAY)));
@@ -92,11 +91,11 @@ public class ScoresAdapter extends RecyclerView.Adapter<ScoresViewHolder> {
                     ViewGroup.LayoutParams.MATCH_PARENT));
 
             TextView matchDay = (TextView) v.findViewById(R.id.matchday_textview);
-            matchDay.setText(Utilies.getMatchDay(mCursor.getInt(COL_MATCHDAY),
+            matchDay.setText(Utilities.getMatchDay(mCursor.getInt(COL_MATCHDAY),
                     mCursor.getInt(COL_LEAGUE)));
 
             TextView league = (TextView) v.findViewById(R.id.league_textview);
-            league.setText(Utilies.getLeague(mCursor.getInt(COL_LEAGUE)));
+            league.setText(Utilities.getLeague(mCursor.getInt(COL_LEAGUE)));
 
             Button shareButton = (Button) v.findViewById(R.id.share_button);
             shareButton.setContentDescription(mContext.getString(R.string.a11y_share_button));
