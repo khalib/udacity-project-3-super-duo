@@ -11,16 +11,13 @@ public class Utilities {
 
     private static final String LOG_TAG = Utilities.class.getSimpleName();
 
-//    public static final int SERIE_A = 357;
-//    public static final int PREMIER_LEGAUE = 354;
-//    public static final int CHAMPIONS_LEAGUE = 362;
-//    public static final int PRIMERA_DIVISION = 358;
-//    public static final int BUNDESLIGA = 351;
-
+    /**
+     * Get the name of the league by ID.
+     *
+     * @param leagueNum
+     * @return
+     */
     public static String getLeague(int leagueNum) {
-        Log.v(LOG_TAG, "===== getLeague()");
-        Log.v(LOG_TAG, "leagueNum: " + leagueNum);
-        
         switch (leagueNum) {
             case ScoresFetchService.SERIE_A:
                 return "Seria A";
@@ -35,13 +32,28 @@ public class Utilities {
                 return "Primera Division";
 
             case ScoresFetchService.BUNDESLIGA1:
-                return "Bundesliga";
+                return "Bundesliga 1";
 
             case ScoresFetchService.BUNDESLIGA2:
-                return "Bundesliga";
+                return "Bundesliga 2";
 
             case ScoresFetchService.BUNDESLIGA3:
-                return "Bundesliga";
+                return "Bundesliga 3";
+
+            case ScoresFetchService.SEGUNDA_DIVISION:
+                return "Segunda Division";
+
+            case ScoresFetchService.LIGUE1:
+                return "France Ligue 1";
+
+            case ScoresFetchService.LIGUE2:
+                return "France Ligue 2";
+
+            case ScoresFetchService.PRIMERA_LIGA:
+                return "Liga BBVA";
+
+            case ScoresFetchService.EREDIVISIE:
+                return "Eredivisie";
 
             default:
                 return "Not known League Please report";

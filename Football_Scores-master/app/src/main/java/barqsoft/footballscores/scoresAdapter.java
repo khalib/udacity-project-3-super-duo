@@ -34,8 +34,7 @@ public class ScoresAdapter extends RecyclerView.Adapter<ScoresViewHolder> {
     final private ItemChoiceManager mItemChoiceManager;
     private Cursor mCursor;
 
-    public ScoresAdapter(Context context, ScoresAdapterOnClickHandler clickHandler, View emptyView, int choiceMode)
-    {
+    public ScoresAdapter(Context context, ScoresAdapterOnClickHandler clickHandler, View emptyView, int choiceMode) {
         mContext = context;
         mClickHandler = clickHandler;
         mEmptyView = emptyView;
@@ -43,8 +42,7 @@ public class ScoresAdapter extends RecyclerView.Adapter<ScoresViewHolder> {
         mItemChoiceManager.setChoiceMode(choiceMode);
     }
 
-    public static interface ScoresAdapterOnClickHandler
-    {
+    public static interface ScoresAdapterOnClickHandler {
         void onClick(Double matchId, ScoresViewHolder viewHolder);
     }
 
