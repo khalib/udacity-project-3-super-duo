@@ -32,8 +32,7 @@
         </activity>
         <activity
             android:label="@string/title_activity_barcode_reader"
-            android:name=".BarcodeReaderActivity"
-            android:parentActivityName=".MainActivity">
+            android:name=".BarcodeReaderActivity">
         </activity>
 
 

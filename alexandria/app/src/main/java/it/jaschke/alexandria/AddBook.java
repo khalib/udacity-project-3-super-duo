@@ -10,6 +10,7 @@ import android.support.v4.app.LoaderManager;
 import android.support.v4.content.CursorLoader;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.util.Patterns;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -20,25 +21,29 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 
+import com.google.android.gms.common.api.CommonStatusCodes;
+import com.google.android.gms.vision.barcode.Barcode;
+
 import it.jaschke.alexandria.data.AlexandriaContract;
 import it.jaschke.alexandria.services.BookService;
 import it.jaschke.alexandria.services.DownloadImage;
 
 
 public class AddBook extends Fragment implements LoaderManager.LoaderCallbacks<Cursor> {
-    private static final String TAG = "INTENT_TO_SCAN_ACTIVITY";
+
+    private final String LOG_TAG = AddBook.class.getSimpleName();
+
     private EditText ean;
     private final int LOADER_ID = 1;
     private View rootView;
     private final String EAN_CONTENT="eanContent";
     private static final String SCAN_FORMAT = "scanFormat";
     private static final String SCAN_CONTENTS = "scanContents";
-    private static final int BARCODE_READER = 9001;
+
+    private static final int REQUEST_CODE_BARCODE_CAPTURE = 9001;
 
     private String mScanFormat = "Format:";
     private String mScanContents = "Contents:";
-
-
 
     public AddBook(){
     }
@@ -53,7 +58,6 @@ public class AddBook extends Fragment implements LoaderManager.LoaderCallbacks<C
 
     @Override
     public View onCreateView(final LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-
         rootView = inflater.inflate(R.layout.fragment_add_book, container, false);
         ean = (EditText) rootView.findViewById(R.id.ean);
 
@@ -93,7 +97,7 @@ public class AddBook extends Fragment implements LoaderManager.LoaderCallbacks<C
             public void onClick(View v) {
                 // Launch barcode reader activity.
                 Intent intent = new Intent(getActivity(), BarcodeReaderActivity.class);
-                startActivityForResult(intent, BARCODE_READER);
+                startActivityForResult(intent, REQUEST_CODE_BARCODE_CAPTURE);
             }
         });
 
@@ -194,5 +198,35 @@ public class AddBook extends Fragment implements LoaderManager.LoaderCallbacks<C
     public void onAttach(Activity activity) {
         super.onAttach(activity);
         activity.setTitle(R.string.scan);
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        Log.v(LOG_TAG, "===== onActivityResult()");
+
+        super.onActivityResult(requestCode, resultCode, data);
+
+        Log.v(LOG_TAG, "requestCode: " + Integer.toString(requestCode));
+        Log.v(LOG_TAG, "resultCode: " + Integer.toString(resultCode));
+
+        if (requestCode == REQUEST_CODE_BARCODE_CAPTURE) {
+            if (resultCode == CommonStatusCodes.SUCCESS) {
+                if (data != null) {
+//                    Barcode barcode = data.getParcelableExtra(BarcodeReaderActivity.BarcodeObject);
+                    String isbn = data.getStringExtra(BarcodeReaderActivity.BarcodeObject);
+                    ean.setText(isbn);
+
+                    Log.v(LOG_TAG, "Barcode read: " + isbn);
+                } else {
+                    Log.v(LOG_TAG, "No barcode captured, intent data is null");
+                }
+            } else {
+                // Error reading barcode.
+                Log.v(LOG_TAG, "Error reading barcode");
+            }
+        }
+        else {
+            super.onActivityResult(requestCode, resultCode, data);
+        }
     }
 }
