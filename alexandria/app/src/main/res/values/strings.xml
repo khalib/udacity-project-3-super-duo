@@ -26,6 +26,7 @@
     <string name="back_button">go back</string>
     <string name="share_text">A must read book: </string>
 
+    <string name="camera_permission_error">Access to the camera is needed for detection</string>
     <string name="low_storage_error">Barcode scanner cannot be downloaded due to low device storage</string>
 
 <!-- TODO: Remove or change this placeholder text -->

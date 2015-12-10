@@ -34,14 +34,9 @@ public class AddBook extends Fragment implements LoaderManager.LoaderCallbacks<C
     private EditText ean;
     private final int LOADER_ID = 1;
     private View rootView;
-    private final String EAN_CONTENT="eanContent";
-    private static final String SCAN_FORMAT = "scanFormat";
-    private static final String SCAN_CONTENTS = "scanContents";
+    private final String EAN_CONTENT = "eanContent";
 
     private static final int REQUEST_CODE_BARCODE_CAPTURE = 9001;
-
-    private String mScanFormat = "Format:";
-    private String mScanContents = "Contents:";
 
     public AddBook(){
     }

@@ -1,6 +1,7 @@
 package it.jaschke.alexandria;
 
 import android.Manifest;
+import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
@@ -9,10 +10,13 @@ import android.content.pm.PackageManager;
 import android.hardware.Camera;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.SurfaceHolder;
+import android.view.View;
+import android.widget.Button;
 import android.widget.Toast;
 
 import com.google.android.gms.common.ConnectionResult;
@@ -39,12 +43,15 @@ public final class BarcodeReaderActivity extends AppCompatActivity {
     private final String LOG_TAG = BarcodeReaderActivity.class.getSimpleName();
 
     private static final int RC_HANDLE_GMS = 9001;
+    private static final int RC_HANDLE_CAMERA_PERM = 2;
+
     private static final boolean CAMERA_SETTINGS_FLASH_MODE = false;
     private static final boolean CAMERA_SETTINGS_FOCUS_MODE = true;
     public static final String BarcodeObject = "Barcode";
 
     private CameraPreview mCameraPreview;
     private CameraSource mCameraSource;
+    private Button mCancelButton;
     private SurfaceHolder mSurfaceHolder;
     private GraphicOverlay<BarcodeGraphic> mGraphicOverlay;
 
@@ -54,17 +61,14 @@ public final class BarcodeReaderActivity extends AppCompatActivity {
         setContentView(R.layout.fragment_barcode_reader);
 
         mCameraPreview = (CameraPreview) findViewById(R.id.barcode_reader_surfaceview);
-        mGraphicOverlay = (GraphicOverlay<BarcodeGraphic>) findViewById(R.id.graphicOverlay);
+        mGraphicOverlay = (GraphicOverlay<BarcodeGraphic>) findViewById(R.id.barcode_reader_graphic_overlay);
+        mCancelButton = (Button) findViewById(R.id.barcode_reader_cancel_button);
 
         // Check for camera permission.
         int cameraPermission = ActivityCompat.checkSelfPermission(this, Manifest.permission.CAMERA);
         if (cameraPermission == PackageManager.PERMISSION_GRANTED) {
-            Log.v(LOG_TAG, "Camera permission is GRANTED");
-
             createCameraSource();
         } else {
-            Log.v(LOG_TAG, "Camera permission is NOT GRANTED");
-
             requestCameraPermission();
         }
 
@@ -110,7 +114,7 @@ public final class BarcodeReaderActivity extends AppCompatActivity {
         // Build the camera for scanning.
         CameraSource.Builder builder = new CameraSource.Builder(getApplicationContext(), barcodeDetector)
                 .setFacing(CameraSource.CAMERA_FACING_BACK)
-                .setRequestedPreviewSize(1600, 1024)
+                .setRequestedPreviewSize(1600, 1600)
                 .setRequestedFps(15.0f);
 
         // Check that auto focus is available.
@@ -130,7 +134,30 @@ public final class BarcodeReaderActivity extends AppCompatActivity {
      * Requests for the camera permission.
      */
     private void requestCameraPermission() {
+        Log.v(LOG_TAG, "===== requestCameraPermission()");
 
+        final String[] permissions = new String[]{Manifest.permission.CAMERA};
+
+        if (!ActivityCompat.shouldShowRequestPermissionRationale(this,
+                Manifest.permission.CAMERA)) {
+            ActivityCompat.requestPermissions(this, permissions, RC_HANDLE_CAMERA_PERM);
+            return;
+        }
+
+        final Activity thisActivity = this;
+
+        View.OnClickListener listener = new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ActivityCompat.requestPermissions(thisActivity, permissions,
+                        RC_HANDLE_CAMERA_PERM);
+            }
+        };
+
+        Snackbar.make(mGraphicOverlay, R.string.camera_permission_error,
+                Snackbar.LENGTH_INDEFINITE)
+                .setAction(R.string.ok_button, listener)
+                .show();
     }
 
     /**
@@ -159,6 +186,16 @@ public final class BarcodeReaderActivity extends AppCompatActivity {
                 mCameraSource = null;
             }
         }
+    }
+
+    /**
+     * Click handler for the cancel button in the view.
+     *
+     * @param view
+     */
+    public void cancelBarcodeScan(View view) {
+        // Close the activity.
+        finish();
     }
 
     @Override

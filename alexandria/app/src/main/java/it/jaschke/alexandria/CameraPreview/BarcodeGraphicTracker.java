@@ -18,7 +18,8 @@ public class BarcodeGraphicTracker extends Tracker<Barcode> {
     private BarcodeGraphic mGraphic;
     private OnNewItemListener mOnNewItemListener;
 
-    BarcodeGraphicTracker(GraphicOverlay<BarcodeGraphic> overlay, BarcodeGraphic graphic, OnNewItemListener listener) {
+    BarcodeGraphicTracker(GraphicOverlay<BarcodeGraphic> overlay, BarcodeGraphic graphic,
+                          OnNewItemListener listener) {
         mOverlay = overlay;
         mGraphic = graphic;
         mOnNewItemListener = listener;
@@ -28,7 +29,7 @@ public class BarcodeGraphicTracker extends Tracker<Barcode> {
      * Callback interface for when a barcode is scanned.
      */
     public interface OnNewItemListener {
-        public void onNewItem(Barcode item);
+        void onNewItem(Barcode item);
     }
 
     /**
