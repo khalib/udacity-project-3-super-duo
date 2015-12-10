@@ -32,7 +32,8 @@
         </activity>
         <activity
             android:label="@string/title_activity_barcode_reader"
-            android:name=".BarcodeReaderActivity">
+            android:name=".BarcodeReaderActivity"
+            android:screenOrientation="portrait">
         </activity>
 
 

@@ -14,13 +14,13 @@
     <it.jaschke.alexandria.CameraPreview.CameraPreview
         android:id="@+id/barcode_reader_surfaceview"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent">
 
-    <!--<it.jaschke.alexandria.CameraPreview.CameraPreview-->
-        <!--android:id="@+id/camera_preview"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="match_parent">-->
+        <it.jaschke.alexandria.CameraPreview.GraphicOverlay
+            android:id="@+id/graphicOverlay"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
 
-    <!--</it.jaschke.alexandria.CameraPreview.CameraPreview>-->
+    </it.jaschke.alexandria.CameraPreview.CameraPreview>
 
 </LinearLayout>

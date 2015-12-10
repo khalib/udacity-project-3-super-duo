@@ -1,7 +1,6 @@
 package it.jaschke.alexandria;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
@@ -18,7 +17,6 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 
 import com.google.android.gms.common.api.CommonStatusCodes;
@@ -206,17 +204,13 @@ public class AddBook extends Fragment implements LoaderManager.LoaderCallbacks<C
 
         super.onActivityResult(requestCode, resultCode, data);
 
-        Log.v(LOG_TAG, "requestCode: " + Integer.toString(requestCode));
-        Log.v(LOG_TAG, "resultCode: " + Integer.toString(resultCode));
-
         if (requestCode == REQUEST_CODE_BARCODE_CAPTURE) {
             if (resultCode == CommonStatusCodes.SUCCESS) {
                 if (data != null) {
-//                    Barcode barcode = data.getParcelableExtra(BarcodeReaderActivity.BarcodeObject);
-                    String isbn = data.getStringExtra(BarcodeReaderActivity.BarcodeObject);
-                    ean.setText(isbn);
+                    Barcode barcode = data.getParcelableExtra(BarcodeReaderActivity.BarcodeObject);
+                    ean.setText(barcode.displayValue);
 
-                    Log.v(LOG_TAG, "Barcode read: " + isbn);
+                    Log.v(LOG_TAG, "Barcode read: " + barcode.displayValue);
                 } else {
                     Log.v(LOG_TAG, "No barcode captured, intent data is null");
                 }
