@@ -17,6 +17,7 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 
 import com.google.android.gms.common.api.CommonStatusCodes;
@@ -98,6 +99,7 @@ public class AddBook extends Fragment implements LoaderManager.LoaderCallbacks<C
             @Override
             public void onClick(View view) {
                 ean.setText("");
+                Toast.makeText(getContext(), R.string.book_saved, Toast.LENGTH_LONG).show();
             }
         });
 
