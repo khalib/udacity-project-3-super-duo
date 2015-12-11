@@ -19,6 +19,7 @@ import it.jaschke.alexandria.services.DownloadImage;
  */
 public class BookListAdapter extends CursorAdapter {
 
+    private final String LOG_TAG = BookListAdapter.class.getSimpleName();
 
     public static class ViewHolder {
         public final ImageView bookCover;
@@ -38,7 +39,6 @@ public class BookListAdapter extends CursorAdapter {
 
     @Override
     public void bindView(View view, Context context, Cursor cursor) {
-
         ViewHolder viewHolder = (ViewHolder) view.getTag();
 
         String imgUrl = cursor.getString(cursor.getColumnIndex(AlexandriaContract.BookEntry.IMAGE_URL));
@@ -60,4 +60,5 @@ public class BookListAdapter extends CursorAdapter {
 
         return view;
     }
+
 }

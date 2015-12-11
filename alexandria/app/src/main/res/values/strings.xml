@@ -13,7 +13,8 @@
     <string name="scan_button">Scan</string>
     <string name="input_hint">Insert ISBN-13. Digits only.</string>
     <string name="book_cover">Bookcover</string>
-    <string name="book_saved">Added to the list</string>
+    <string name="book_saved">The book has been added to the list</string>
+    <string name="book_deleted">The book has been removed from the list</string>
 
     <string name="ok_button">Next</string>
     <string name="save_button">Save</string>
