@@ -9,7 +9,6 @@ import android.support.v4.content.CursorLoader;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v7.widget.ShareActionProvider;
 import android.util.Log;
-import android.util.Patterns;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -20,9 +19,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
+
 import it.jaschke.alexandria.data.AlexandriaContract;
 import it.jaschke.alexandria.services.BookService;
-import it.jaschke.alexandria.services.DownloadImage;
 
 
 public class BookDetail extends Fragment implements LoaderManager.LoaderCallbacks<Cursor> {
@@ -126,11 +126,17 @@ public class BookDetail extends Fragment implements LoaderManager.LoaderCallback
 
         ((TextView) rootView.findViewById(R.id.authors)).setLines(authorsLines);
         ((TextView) rootView.findViewById(R.id.authors)).setText(authorsOutput);
+
+        // Load bookcover image.
         String imgUrl = data.getString(data.getColumnIndex(AlexandriaContract.BookEntry.IMAGE_URL));
-        if(Patterns.WEB_URL.matcher(imgUrl).matches()){
-            new DownloadImage((ImageView) rootView.findViewById(R.id.fullBookCover)).execute(imgUrl);
-            rootView.findViewById(R.id.fullBookCover).setVisibility(View.VISIBLE);
-        }
+        ImageView bookCover = (ImageView) rootView.findViewById(R.id.fullBookCover);
+
+        Glide.with(this)
+                .load(imgUrl)
+                .error(R.drawable.ic_launcher)
+                .crossFade()
+                .override(400, 400)
+                .into(bookCover);
 
         String categories = data.getString(data.getColumnIndex(AlexandriaContract.CategoryEntry.CATEGORY));
         ((TextView) rootView.findViewById(R.id.categories)).setText(categories);

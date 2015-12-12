@@ -20,6 +20,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 
+import com.bumptech.glide.Glide;
 import com.google.android.gms.common.api.CommonStatusCodes;
 import com.google.android.gms.vision.barcode.Barcode;
 
@@ -171,11 +172,16 @@ public class AddBook extends Fragment implements LoaderManager.LoaderCallbacks<C
         ((TextView) rootView.findViewById(R.id.authors)).setLines(authorsLines);
         ((TextView) rootView.findViewById(R.id.authors)).setText(authorsOutput);
 
+        // Load bookcover image.
         String imgUrl = data.getString(data.getColumnIndex(AlexandriaContract.BookEntry.IMAGE_URL));
-        if(Patterns.WEB_URL.matcher(imgUrl).matches()){
-            new DownloadImage((ImageView) rootView.findViewById(R.id.bookCover)).execute(imgUrl);
-            rootView.findViewById(R.id.bookCover).setVisibility(View.VISIBLE);
-        }
+        ImageView bookCover = (ImageView) rootView.findViewById(R.id.bookCover);
+
+        Glide.with(getContext())
+                .load(imgUrl)
+                .error(R.drawable.ic_launcher)
+                .crossFade()
+                .override(550, 550)
+                .into(bookCover);
 
         String categories = data.getString(data.getColumnIndex(AlexandriaContract.CategoryEntry.CATEGORY));
         ((TextView) rootView.findViewById(R.id.categories)).setText(categories);
