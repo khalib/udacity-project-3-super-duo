@@ -1,6 +1,9 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
-    android:layout_height="match_parent" tools:context="it.jaschke.alexandria.AddBook">
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context="it.jaschke.alexandria.AddBook">
 
     <LinearLayout
         android:orientation="vertical"
@@ -24,11 +27,13 @@
                     android:textSize="@dimen/head_line"
                     android:textIsSelectable="true"
                     android:textStyle="bold"
-                    android:paddingRight="20dp"
+                    android:paddingRight="25dp"
+                    android:paddingEnd="25dp"
                     android:layout_alignParentTop="true"
                     android:layout_alignParentLeft="true"
                     android:layout_alignParentStart="true"
-                    android:layout_margin="10dp"/>
+                    android:layout_margin="10dp"
+                    tools:text="This is a very long book title which goes on and on" />
 
                 <ImageView
                     android:layout_width="wrap_content"
@@ -38,7 +43,8 @@
                     android:layout_marginTop="15dp"
                     android:layout_below="@+id/fullBookTitle"
                     android:layout_alignLeft="@+id/fullBookTitle"
-                    android:layout_alignStart="@+id/fullBookTitle"/>
+                    android:layout_alignStart="@+id/fullBookTitle"
+                    tools:src="@drawable/ic_launcher" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -51,7 +57,8 @@
                     android:layout_marginRight="10dp"
                     android:layout_alignTop="@+id/fullBookCover"
                     android:layout_toRightOf="@+id/fullBookCover"
-                    android:layout_toEndOf="@+id/fullBookCover"/>
+                    android:layout_toEndOf="@+id/fullBookCover"
+                    tools:text="This is the subtitle to the book" />
 
 
                 <TextView
@@ -62,7 +69,7 @@
                     android:layout_marginLeft="10dp"
                     android:layout_below="@+id/fullBookCover"
                     android:layout_margin="10dp"
-                    />
+                    tools:text="This is the books description." />
 
 
                 <LinearLayout
@@ -100,9 +107,7 @@
                     android:layout_gravity="right|top"
                     android:layout_alignParentTop="true"
                     android:layout_alignRight="@+id/fullBookTitle"
-                    android:layout_alignEnd="@+id/fullBookTitle"/>
-
-
+                    android:layout_alignEnd="@+id/fullBookTitle" />
             </RelativeLayout>
 
         </ScrollView>
