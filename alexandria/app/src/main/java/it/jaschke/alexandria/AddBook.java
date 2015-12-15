@@ -180,7 +180,7 @@ public class AddBook extends Fragment implements LoaderManager.LoaderCallbacks<C
                 .load(imgUrl)
                 .error(R.drawable.ic_launcher)
                 .crossFade()
-                .override(550, 550)
+                .override(400, 400)
                 .into(bookCover);
 
         String categories = data.getString(data.getColumnIndex(AlexandriaContract.CategoryEntry.CATEGORY));

@@ -31,6 +31,7 @@
 
     <string name="camera_permission_error">Access to the camera is needed for detection</string>
     <string name="low_storage_error">Barcode scanner cannot be downloaded due to low device storage</string>
+    <string name="network_connection_error">No internet connection available. Please try again later.</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="about_text">This application gets book information from a Google API. All titles, cover images, and author information come from there.

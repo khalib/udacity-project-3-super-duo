@@ -5,8 +5,10 @@ import android.content.ContentValues;
 import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
+import android.os.Handler;
 import android.support.v4.content.LocalBroadcastManager;
 import android.util.Log;
+import android.widget.Toast;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -21,6 +23,7 @@ import java.net.URL;
 
 import it.jaschke.alexandria.MainActivity;
 import it.jaschke.alexandria.R;
+import it.jaschke.alexandria.Utility;
 import it.jaschke.alexandria.data.AlexandriaContract;
 
 
@@ -35,11 +38,20 @@ public class BookService extends IntentService {
 
     public static final String FETCH_BOOK = "it.jaschke.alexandria.services.action.FETCH_BOOK";
     public static final String DELETE_BOOK = "it.jaschke.alexandria.services.action.DELETE_BOOK";
-
     public static final String EAN = "it.jaschke.alexandria.services.extra.EAN";
+
+    private Handler mHandler;
 
     public BookService() {
         super("Alexandria");
+    }
+
+    @Override
+    public void onCreate() {
+        super.onCreate();
+
+        // Obtain a handler from the main thread.
+        mHandler = new Handler();
     }
 
     @Override
@@ -47,8 +59,20 @@ public class BookService extends IntentService {
         if (intent != null) {
             final String action = intent.getAction();
             if (FETCH_BOOK.equals(action)) {
-                final String ean = intent.getStringExtra(EAN);
-                fetchBook(ean);
+                // Check if there is internet connection.
+                if (Utility.isNetworkAvailable(this)) {
+                    final String ean = intent.getStringExtra(EAN);
+                    fetchBook(ean);
+                } else {
+                    // Notify the user in the main thread that there is no connection.
+                    mHandler.post(new Runnable() {
+                        @Override
+                        public void run() {
+                            Log.e(LOG_TAG, "ERROR: No internet connection available");
+                            Toast.makeText(BookService.this, R.string.network_connection_error, Toast.LENGTH_LONG).show();
+                        }
+                    });
+                }
             } else if (DELETE_BOOK.equals(action)) {
                 final String ean = intent.getStringExtra(EAN);
                 deleteBook(ean);
@@ -71,8 +95,7 @@ public class BookService extends IntentService {
      * parameters.
      */
     private void fetchBook(String ean) {
-
-        if(ean.length()!=13){
+        if (ean.length()!=13) {
             return;
         }
 
@@ -84,7 +107,7 @@ public class BookService extends IntentService {
                 null  // sort order
         );
 
-        if(bookEntry.getCount()>0){
+        if (bookEntry.getCount() > 0) {
             bookEntry.close();
             return;
         }
@@ -134,6 +157,7 @@ public class BookService extends IntentService {
             if (urlConnection != null) {
                 urlConnection.disconnect();
             }
+
             if (reader != null) {
                 try {
                     reader.close();
@@ -159,9 +183,9 @@ public class BookService extends IntentService {
         try {
             JSONObject bookJson = new JSONObject(bookJsonString);
             JSONArray bookArray;
-            if(bookJson.has(ITEMS)){
+            if (bookJson.has(ITEMS)) {
                 bookArray = bookJson.getJSONArray(ITEMS);
-            }else{
+            } else {
                 Intent messageIntent = new Intent(MainActivity.MESSAGE_EVENT);
                 messageIntent.putExtra(MainActivity.MESSAGE_KEY,getResources().getString(R.string.not_found));
                 LocalBroadcastManager.getInstance(getApplicationContext()).sendBroadcast(messageIntent);
