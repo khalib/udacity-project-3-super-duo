@@ -29,6 +29,8 @@ import android.widget.ListView;
  */
 public class NavigationDrawerFragment extends Fragment {
 
+    private final String LOG_TAG = NavigationDrawerCallbacks.class.getSimpleName();
+
     /**
      * Remember the position of the selected item.
      */
