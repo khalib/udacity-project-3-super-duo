@@ -57,6 +57,9 @@ public class BookListAdapter extends CursorAdapter {
 
         String bookSubTitle = cursor.getString(cursor.getColumnIndex(AlexandriaContract.BookEntry.SUBTITLE));
         viewHolder.bookSubTitle.setText(bookSubTitle);
+
+        // Add content description to the book cover image.
+        viewHolder.bookCover.setContentDescription(bookTitle);
     }
 
     @Override

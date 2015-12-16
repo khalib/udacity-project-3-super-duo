@@ -186,6 +186,9 @@ public class AddBook extends Fragment implements LoaderManager.LoaderCallbacks<C
         String categories = data.getString(data.getColumnIndex(AlexandriaContract.CategoryEntry.CATEGORY));
         ((TextView) rootView.findViewById(R.id.categories)).setText(categories);
 
+        // Add content description to the book cover image.
+        bookCover.setContentDescription(bookTitle);
+
         rootView.findViewById(R.id.save_button).setVisibility(View.VISIBLE);
         rootView.findViewById(R.id.delete_button).setVisibility(View.VISIBLE);
     }

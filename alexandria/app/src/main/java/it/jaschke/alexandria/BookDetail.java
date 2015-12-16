@@ -150,6 +150,9 @@ public class BookDetail extends Fragment implements LoaderManager.LoaderCallback
         String categories = data.getString(data.getColumnIndex(AlexandriaContract.CategoryEntry.CATEGORY));
         ((TextView) rootView.findViewById(R.id.categories)).setText(categories);
 
+        // Add content description to the book cover image.
+        bookCover.setContentDescription(bookTitle);
+
         if(rootView.findViewById(R.id.right_container)!=null){
             rootView.findViewById(R.id.backButton).setVisibility(View.INVISIBLE);
         }

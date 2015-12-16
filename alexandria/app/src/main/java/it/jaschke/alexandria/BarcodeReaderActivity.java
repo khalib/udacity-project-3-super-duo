@@ -128,6 +128,9 @@ public final class BarcodeReaderActivity extends AppCompatActivity {
                 ? Camera.Parameters.FLASH_MODE_TORCH
                 : null)
                 .build();
+
+        // Display scanning instructions.
+        Snackbar.make(mGraphicOverlay, R.string.barcode_scan_instructions, Snackbar.LENGTH_LONG).show();
     }
 
     /**

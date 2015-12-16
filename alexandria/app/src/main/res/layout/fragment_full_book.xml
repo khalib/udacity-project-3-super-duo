@@ -122,6 +122,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/delete"
+                android:contentDescription="@string/delete"
                 style="?android:attr/buttonBarButtonStyle"
                 android:id="@+id/delete_button"
                 android:drawableLeft="@drawable/ic_action_discard"
