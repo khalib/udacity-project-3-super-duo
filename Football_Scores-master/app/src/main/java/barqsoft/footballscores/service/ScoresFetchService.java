@@ -5,7 +5,9 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
+import android.os.Handler;
 import android.util.Log;
+import android.widget.Toast;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -24,6 +26,7 @@ import java.util.Vector;
 
 import barqsoft.footballscores.DatabaseContract;
 import barqsoft.footballscores.R;
+import barqsoft.footballscores.Utilities;
 
 /**
  * Created by yehya khaled on 3/2/2015.
@@ -35,6 +38,8 @@ public class ScoresFetchService extends IntentService {
     final String BASE_URL = "http://api.football-data.org/alpha/fixtures"; //Base URL
     final String QUERY_TIME_FRAME = "timeFrame"; //Time Frame parameter to determine days
     //final String QUERY_MATCH_DAY = "matchday";
+
+    private Handler mHandler;
 
     // This set of league codes is for the 2015/2016 season. In fall of 2016, they will need to
     // be updated. Feel free to use the codes
@@ -56,11 +61,33 @@ public class ScoresFetchService extends IntentService {
     }
 
     @Override
-    protected void onHandleIntent(Intent intent) {
-        getData("n2");
-        getData("p2");
+    public void onCreate() {
+        super.onCreate();
 
-        return;
+        // Obtain a handler from the main thread.
+        mHandler = new Handler();
+    }
+
+    @Override
+    protected void onHandleIntent(Intent intent) {
+        Log.v(LOG_TAG, "===== onHandleIntent()");
+
+        if (Utilities.isNetworkAvailable(this)) {
+            Log.v(LOG_TAG, "YES network");
+            getData("n2");
+            getData("p2");
+        } else {
+            Log.v(LOG_TAG, "NO network");
+
+            // Notify the user in the main thread that there is no connection.
+            mHandler.post(new Runnable() {
+                @Override
+                public void run() {
+                    Log.e(LOG_TAG, "ERROR: No internet connection available");
+                    Toast.makeText(ScoresFetchService.this, R.string.network_connection_error, Toast.LENGTH_SHORT).show();
+                }
+            });
+        }
     }
 
     private void getData(String timeFrame) {

@@ -24,8 +24,7 @@ public class ScoresViewHolder extends RecyclerView.ViewHolder implements View.On
     public FrameLayout shareFrame;
     public double matchId;
 
-    public ScoresViewHolder(View view, ScoresAdapter.ScoresAdapterOnClickHandler onClickHandler)
-    {
+    public ScoresViewHolder(View view, ScoresAdapter.ScoresAdapterOnClickHandler onClickHandler) {
         super(view);
 
         homeName = (TextView) view.findViewById(R.id.home_name);

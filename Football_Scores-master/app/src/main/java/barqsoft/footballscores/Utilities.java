@@ -1,5 +1,8 @@
 package barqsoft.footballscores;
 
+import android.content.Context;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.util.Log;
 
 import barqsoft.footballscores.service.ScoresFetchService;
@@ -87,7 +90,10 @@ public class Utilities {
     }
 
     public static int getTeamCrestByTeamName (String teamname) {
-        if (teamname==null) {
+        Log.v(LOG_TAG, "===== getTeamCrestByTeamName()");
+        Log.v(LOG_TAG, "teamname: " + teamname);
+
+        if (teamname == null) {
             return R.drawable.no_icon;
         }
 
@@ -127,6 +133,21 @@ public class Utilities {
             default:
                 return R.drawable.no_icon;
         }
+    }
+
+    /**
+     * Returns true if the network is available or about to become available.
+     *
+     * @param c Context used to get the ConnectivityManager
+     * @return true if the network is available
+     */
+    static public boolean isNetworkAvailable(Context c) {
+        ConnectivityManager cm =
+                (ConnectivityManager)c.getSystemService(Context.CONNECTIVITY_SERVICE);
+
+        NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
+        return activeNetwork != null &&
+                activeNetwork.isConnectedOrConnecting();
     }
 
 }

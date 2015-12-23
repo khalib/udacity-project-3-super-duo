@@ -32,7 +32,7 @@
                 android:layout_gravity="center"
                 android:textSize="@dimen/TeamNames"
                 android:gravity="center"
-                tools:text="@string/test_text" />
+                tools:text="Home Team" />
         </LinearLayout>
 
         <LinearLayout
@@ -45,7 +45,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="0dp"
                 android:layout_weight="1"
-                tools:text="@string/test_text"
+                tools:text="1 - 0"
                 android:layout_gravity="center"
                 android:gravity="center"
                 android:textSize="@dimen/Score" />
@@ -54,7 +54,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="0dp"
                 android:layout_weight="1"
-                tools:text="@string/test_text"
+                tools:text="3:30"
                 android:layout_gravity="center"
                 android:gravity="center" />
 
@@ -77,7 +77,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:gravity="center"
-                tools:text="@string/test_text"
+                tools:text="Away Team"
                 android:textSize="@dimen/TeamNames" />
         </LinearLayout>
     </LinearLayout>

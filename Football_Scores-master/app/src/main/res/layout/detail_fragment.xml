@@ -38,7 +38,8 @@
             android:layout_gravity="center"
             android:gravity="center"
             android:text="@string/share_text"
-            android:drawableStart="@android:drawable/ic_menu_share" />
+            android:drawableStart="@android:drawable/ic_menu_share"
+            android:contentDescription="@string/share_text" />
     </FrameLayout>
 
 </LinearLayout>
