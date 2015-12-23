@@ -78,8 +78,6 @@ public final class BarcodeReaderActivity extends AppCompatActivity {
      * Creates and starts the camera to scan for a barcode.
      */
     private void createCameraSource() {
-        Log.v(LOG_TAG, "===== createCameraSource()");
-
         Context context = getApplicationContext();
 
         BarcodeDetector barcodeDetector = new BarcodeDetector.Builder(context).build();
@@ -137,8 +135,6 @@ public final class BarcodeReaderActivity extends AppCompatActivity {
      * Requests for the camera permission.
      */
     private void requestCameraPermission() {
-        Log.v(LOG_TAG, "===== requestCameraPermission()");
-
         final String[] permissions = new String[]{Manifest.permission.CAMERA};
 
         if (!ActivityCompat.shouldShowRequestPermissionRationale(this,
@@ -169,8 +165,6 @@ public final class BarcodeReaderActivity extends AppCompatActivity {
      * again when the camera source is created.
      */
     private void startCameraSource() throws SecurityException {
-        Log.v(LOG_TAG, "===== startCameraSource()");
-
         // check that the device has play services available.
         int code = GoogleApiAvailability.getInstance().isGooglePlayServicesAvailable(
                 getApplicationContext());

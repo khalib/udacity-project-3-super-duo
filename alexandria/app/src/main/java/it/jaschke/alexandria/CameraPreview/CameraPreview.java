@@ -44,10 +44,9 @@ public class CameraPreview extends ViewGroup {
 
     @Override
     protected void onLayout(boolean changed, int l, int t, int r, int b) {
-        Log.v(LOG_TAG, "===== onLayout()");
-
         int width = 320;
         int height = 240;
+
         if (mCameraSource != null) {
             Size size = mCameraSource.getPreviewSize();
             if (size != null) {
@@ -93,11 +92,8 @@ public class CameraPreview extends ViewGroup {
     private class SurfaceCallback implements SurfaceHolder.Callback {
         @Override
         public void surfaceCreated(SurfaceHolder holder) {
-            Log.v(LOG_TAG, "===== surfaceCreated()");
-
             mSurfaceAvailable = true;
             try {
-                Log.v(LOG_TAG, "===== startIfReady()");
                 startIfReady();
             } catch (SecurityException se) {
                 Log.e(LOG_TAG,"Do not have permission to start the camera", se);
@@ -108,21 +104,17 @@ public class CameraPreview extends ViewGroup {
 
         @Override
         public void surfaceChanged(SurfaceHolder holder, int format, int width, int height) {
-            Log.v(LOG_TAG, "===== surfaceChanged()");
+
         }
 
         @Override
         public void surfaceDestroyed(SurfaceHolder holder) {
-            Log.v(LOG_TAG, "===== surfaceDestroyed()");
-
             mSurfaceAvailable = false;
         }
     }
 
     @RequiresPermission(Manifest.permission.CAMERA)
     public void start(CameraSource cameraSource) throws IOException, SecurityException {
-        Log.v(LOG_TAG, "===== start() 1");
-
         if (cameraSource == null) {
             stop();
         }
@@ -137,23 +129,17 @@ public class CameraPreview extends ViewGroup {
 
     @RequiresPermission(Manifest.permission.CAMERA)
     public void start(CameraSource cameraSource, GraphicOverlay overlay) throws IOException, SecurityException {
-        Log.v(LOG_TAG, "===== start() 2");
-
         mOverlay = overlay;
         start(cameraSource);
     }
 
     public void stop() {
-        Log.v(LOG_TAG, "===== stop()");
-
         if (mCameraSource != null) {
             mCameraSource.stop();
         }
     }
 
     public void release() {
-        Log.v(LOG_TAG, "===== release()");
-
         if (mCameraSource != null) {
             mCameraSource.release();
             mCameraSource = null;
@@ -162,8 +148,6 @@ public class CameraPreview extends ViewGroup {
 
     @RequiresPermission(Manifest.permission.CAMERA)
     private void startIfReady() throws IOException, SecurityException {
-        Log.v(LOG_TAG, "===== startIfReady()");
-
         if (mStartRequested && mSurfaceAvailable) {
             mCameraSource.start(mSurfaceView.getHolder());
             if (mOverlay != null) {
@@ -184,8 +168,6 @@ public class CameraPreview extends ViewGroup {
     }
 
     private boolean isPortraitMode() {
-        Log.v(LOG_TAG, "===== isPortraitMode()");
-
         int orientation = mContext.getResources().getConfiguration().orientation;
         if (orientation == Configuration.ORIENTATION_LANDSCAPE) {
             return false;

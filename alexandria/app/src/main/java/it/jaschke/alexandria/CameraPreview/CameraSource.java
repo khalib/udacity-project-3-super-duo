@@ -238,8 +238,6 @@ public class CameraSource {
          * Creates an instance of the camera source.
          */
         public CameraSource build() {
-            Log.v(LOG_TAG, "===== CameraSource.build()");
-
             mCameraSource.mFrameProcessor = mCameraSource.new FrameProcessingRunnable(mDetector);
             return mCameraSource;
         }

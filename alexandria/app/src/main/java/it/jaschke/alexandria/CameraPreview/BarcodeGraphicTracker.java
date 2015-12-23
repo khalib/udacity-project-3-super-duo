@@ -37,8 +37,6 @@ public class BarcodeGraphicTracker extends Tracker<Barcode> {
      */
     @Override
     public void onNewItem(int id, Barcode item) {
-        Log.v(LOG_TAG, "===== onNewItem()");
-
         // Listener callback.
         if (mOnNewItemListener != null) {
             mOnNewItemListener.onNewItem(item);
@@ -52,8 +50,6 @@ public class BarcodeGraphicTracker extends Tracker<Barcode> {
      */
     @Override
     public void onUpdate(Detector.Detections<Barcode> detectionResults, Barcode item) {
-        Log.v(LOG_TAG, "===== onUpdate()");
-
         mOverlay.add(mGraphic);
         mGraphic.updateItem(item);
     }
@@ -63,8 +59,6 @@ public class BarcodeGraphicTracker extends Tracker<Barcode> {
      */
     @Override
     public void onMissing(Detector.Detections<Barcode> detectionResults) {
-        Log.v(LOG_TAG, "===== onMissing()");
-
         mOverlay.remove(mGraphic);
     }
 
@@ -73,8 +67,6 @@ public class BarcodeGraphicTracker extends Tracker<Barcode> {
      */
     @Override
     public void onDone() {
-        Log.v(LOG_TAG, "===== onDone()");
-
         mOverlay.remove(mGraphic);
     }
 

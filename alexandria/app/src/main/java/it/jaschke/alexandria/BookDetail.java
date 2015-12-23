@@ -36,7 +36,7 @@ public class BookDetail extends Fragment implements LoaderManager.LoaderCallback
     private String bookTitle;
     private ShareActionProvider shareActionProvider;
 
-    public BookDetail(){
+    public BookDetail() {
     }
 
     @Override
@@ -47,8 +47,6 @@ public class BookDetail extends Fragment implements LoaderManager.LoaderCallback
 
     @Override
     public View onCreateView(final LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        Log.v(LOG_TAG, "===== onCreateOptionsMenu()");
-
         Bundle arguments = getArguments();
         if (arguments != null) {
             ean = arguments.getString(BookDetail.EAN_KEY);
@@ -75,8 +73,6 @@ public class BookDetail extends Fragment implements LoaderManager.LoaderCallback
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        Log.v(LOG_TAG, "===== onCreateOptionsMenu()");
-
         inflater.inflate(R.menu.book_detail, menu);
 
         MenuItem menuItem = menu.findItem(R.id.action_share);
@@ -97,8 +93,6 @@ public class BookDetail extends Fragment implements LoaderManager.LoaderCallback
 
     @Override
     public void onLoadFinished(android.support.v4.content.Loader<Cursor> loader, Cursor data) {
-        Log.v(LOG_TAG, "===== onLoadFinished()");
-
         if (!data.moveToFirst()) {
             return;
         }
@@ -156,7 +150,6 @@ public class BookDetail extends Fragment implements LoaderManager.LoaderCallback
         if(rootView.findViewById(R.id.right_container)!=null){
             rootView.findViewById(R.id.backButton).setVisibility(View.INVISIBLE);
         }
-
     }
 
     @Override

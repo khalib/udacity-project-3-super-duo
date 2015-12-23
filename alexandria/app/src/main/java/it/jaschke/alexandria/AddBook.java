@@ -26,7 +26,6 @@ import com.google.android.gms.vision.barcode.Barcode;
 
 import it.jaschke.alexandria.data.AlexandriaContract;
 import it.jaschke.alexandria.services.BookService;
-import it.jaschke.alexandria.services.DownloadImage;
 
 
 public class AddBook extends Fragment implements LoaderManager.LoaderCallbacks<Cursor> {
@@ -46,7 +45,8 @@ public class AddBook extends Fragment implements LoaderManager.LoaderCallbacks<C
     @Override
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
-        if(ean!=null) {
+
+        if (ean!=null) {
             outState.putString(EAN_CONTENT, ean.getText().toString());
         }
     }
@@ -198,7 +198,7 @@ public class AddBook extends Fragment implements LoaderManager.LoaderCallbacks<C
 
     }
 
-    private void clearFields(){
+    private void clearFields() {
         ((TextView) rootView.findViewById(R.id.bookTitle)).setText("");
         ((TextView) rootView.findViewById(R.id.bookSubTitle)).setText("");
         ((TextView) rootView.findViewById(R.id.authors)).setText("");
@@ -216,8 +216,6 @@ public class AddBook extends Fragment implements LoaderManager.LoaderCallbacks<C
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        Log.v(LOG_TAG, "===== onActivityResult()");
-
         super.onActivityResult(requestCode, resultCode, data);
 
         if (requestCode == REQUEST_CODE_BARCODE_CAPTURE) {
