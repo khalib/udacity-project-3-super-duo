@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <it.jaschke.alexandria.CameraPreview.CameraPreview
+        android:id="@+id/barcode_reader_surfaceview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1">
+
+        <it.jaschke.alexandria.CameraPreview.GraphicOverlay
+            android:id="@+id/barcode_reader_graphic_overlay"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+    </it.jaschke.alexandria.CameraPreview.CameraPreview>
+
+    <Button
+        android:id="@+id/barcode_reader_cancel_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/cancel_button"
+        android:contentDescription="@string/cancel_button"
+        android:onClick="cancelBarcodeScan" />
+
+</LinearLayout>

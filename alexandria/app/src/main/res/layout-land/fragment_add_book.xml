@@ -30,12 +30,13 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/scan_button"
+            android:contentDescription="@string/scan_button"
             android:id="@+id/scan_button"
             android:layout_marginLeft="23dp"
             android:layout_marginStart="23dp"
             android:layout_alignBottom="@+id/ean"
             android:layout_toRightOf="@+id/ean"
-            android:layout_toEndOf="@+id/ean"/>
+            android:layout_toEndOf="@+id/ean" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -49,7 +50,8 @@
             android:layout_alignStart="@+id/ean"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
-            android:layout_marginTop="10dp"/>
+            android:layout_marginTop="10dp"
+            tools:text="The Book Title" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -58,7 +60,8 @@
             android:layout_below="@+id/bookTitle"
             android:layout_alignLeft="@+id/bookTitle"
             android:layout_alignStart="@+id/bookTitle"
-            android:layout_marginTop="10dp"/>
+            android:layout_marginTop="10dp"
+            tools:text="The Book Subtitle" />
 
         <ImageView
             android:layout_width="wrap_content"
@@ -67,38 +70,38 @@
             android:contentDescription="@string/book_cover"
             android:minHeight="20dip"
             android:minWidth="20dip"
+            android:layout_marginRight="10dp"
             android:layout_below="@+id/bookSubTitle"
             android:layout_alignLeft="@+id/bookSubTitle"
             android:layout_alignStart="@+id/bookSubTitle"
-            />
+            tools:src="@drawable/ic_launcher" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/authors"
             android:textSize="@dimen/small_fontsize"
-            android:layout_marginLeft="25dp"
+            android:textStyle="bold"
             android:layout_alignTop="@+id/bookCover"
             android:layout_toRightOf="@+id/bookCover"
-            />
+            tools:text="Authors" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/categories"
             android:textSize="@dimen/small_fontsize"
-            android:layout_below="@+id/bookCover"
-            android:layout_alignLeft="@+id/bookCover"
-            android:layout_alignStart="@+id/bookCover"
-            android:layout_marginTop="10dp"/>
+            android:layout_below="@+id/authors"
+            android:layout_toRightOf="@+id/bookCover"
+            android:layout_marginTop="5dp"
+            tools:text="Categories" />
 
         <LinearLayout
             android:orientation="vertical"
             android:layout_width="wrap_content"
             android:layout_height="fill_parent"
             android:layout_alignParentTop="true"
-            android:layout_alignParentRight="true"
-            >
+            android:layout_alignParentRight="true">
 
             <ImageButton
                 android:layout_width="wrap_content"
@@ -108,14 +111,13 @@
                 android:src="@drawable/ic_action_discard"
                 style="?android:attr/buttonBarButtonStyle"
                 android:id="@+id/delete_button"
-                android:visibility="invisible"
-                />
+                android:visibility="invisible" />
 
             <ImageButton
                 android:layout_width="wrap_content"
                 android:layout_height="fill_parent"
-                android:contentDescription="@string/ok_button"
-                android:text="@string/ok_button"
+                android:contentDescription="@string/save_button"
+                android:text="@string/save_button"
                 android:layout_weight="1"
                 android:id="@+id/save_button"
                 android:visibility="invisible"

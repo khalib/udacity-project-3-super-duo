@@ -30,6 +30,11 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".MainActivity" />
         </activity>
+        <activity
+            android:label="@string/title_activity_barcode_reader"
+            android:name=".BarcodeReaderActivity"
+            android:screenOrientation="portrait">
+        </activity>
 
 
 

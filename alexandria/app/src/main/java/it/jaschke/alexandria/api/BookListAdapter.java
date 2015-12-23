@@ -10,15 +10,17 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+
 import it.jaschke.alexandria.R;
 import it.jaschke.alexandria.data.AlexandriaContract;
-import it.jaschke.alexandria.services.DownloadImage;
 
 /**
  * Created by saj on 11/01/15.
  */
 public class BookListAdapter extends CursorAdapter {
 
+    private final String LOG_TAG = BookListAdapter.class.getSimpleName();
 
     public static class ViewHolder {
         public final ImageView bookCover;
@@ -38,17 +40,25 @@ public class BookListAdapter extends CursorAdapter {
 
     @Override
     public void bindView(View view, Context context, Cursor cursor) {
-
         ViewHolder viewHolder = (ViewHolder) view.getTag();
 
         String imgUrl = cursor.getString(cursor.getColumnIndex(AlexandriaContract.BookEntry.IMAGE_URL));
-        new DownloadImage(viewHolder.bookCover).execute(imgUrl);
+
+        // Load bookcover.
+        Glide.with(context)
+                .load(imgUrl)
+                .error(R.drawable.ic_launcher)
+                .crossFade()
+                .into(viewHolder.bookCover);
 
         String bookTitle = cursor.getString(cursor.getColumnIndex(AlexandriaContract.BookEntry.TITLE));
         viewHolder.bookTitle.setText(bookTitle);
 
         String bookSubTitle = cursor.getString(cursor.getColumnIndex(AlexandriaContract.BookEntry.SUBTITLE));
         viewHolder.bookSubTitle.setText(bookSubTitle);
+
+        // Add content description to the book cover image.
+        viewHolder.bookCover.setContentDescription(bookTitle);
     }
 
     @Override
@@ -60,4 +70,5 @@ public class BookListAdapter extends CursorAdapter {
 
         return view;
     }
+
 }
