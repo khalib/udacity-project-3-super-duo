@@ -70,15 +70,11 @@ public class ScoresFetchService extends IntentService {
 
     @Override
     protected void onHandleIntent(Intent intent) {
-        Log.v(LOG_TAG, "===== onHandleIntent()");
-
+        // Check if network connection is available.
         if (Utilities.isNetworkAvailable(this)) {
-            Log.v(LOG_TAG, "YES network");
             getData("n2");
             getData("p2");
         } else {
-            Log.v(LOG_TAG, "NO network");
-
             // Notify the user in the main thread that there is no connection.
             mHandler.post(new Runnable() {
                 @Override
@@ -90,6 +86,11 @@ public class ScoresFetchService extends IntentService {
         }
     }
 
+    /***
+     * Fetches the score data from the API.
+     *
+     * @param timeFrame
+     */
     private void getData(String timeFrame) {
         // Creating fetch URL
         Uri fetch_build = Uri.parse(BASE_URL).buildUpon().
@@ -173,6 +174,13 @@ public class ScoresFetchService extends IntentService {
         }
     }
 
+    /**
+     * Process the JSON data from the API.
+     *
+     * @param JSONdata
+     * @param mContext
+     * @param isReal
+     */
     private void processJSONdata (String JSONdata,Context mContext, boolean isReal) {
         // JSON data
         final String SEASON_LINK = "http://api.football-data.org/alpha/soccerseasons/";

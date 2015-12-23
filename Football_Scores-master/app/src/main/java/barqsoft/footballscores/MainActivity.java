@@ -7,8 +7,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
-public class MainActivity extends ActionBarActivity
-{
+public class MainActivity extends ActionBarActivity {
 
     private final String LOG_TAG = MainActivity.class.getSimpleName();
 
@@ -23,7 +22,7 @@ public class MainActivity extends ActionBarActivity
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_main);
-        Log.d(LOG_TAG, "Reached MainActivity onCreate");
+
         if (savedInstanceState == null) {
             mMyMain = new PagerFragment();
             getSupportFragmentManager().beginTransaction()

@@ -124,18 +124,6 @@ public class ScoresAdapter extends RecyclerView.Adapter<ScoresViewHolder> {
         return mCursor.getCount();
     }
 
-    /*
-    @Override
-    public View newView(Context context, Cursor cursor, ViewGroup parent)
-    {
-        View mItem = LayoutInflater.from(context).inflate(R.layout.scores_list_item, parent, false);
-        ScoresViewHolder mHolder = new ScoresViewHolder(mItem);
-        mItem.setTag(mHolder);
-        //Log.v(FetchScoreTask.LOG_TAG,"new View inflated");
-        return mItem;
-    }
-    */
-
     /**
      *
      *

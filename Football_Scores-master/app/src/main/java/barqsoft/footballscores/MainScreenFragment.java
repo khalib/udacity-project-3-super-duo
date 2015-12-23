@@ -22,8 +22,7 @@ import barqsoft.footballscores.service.ScoresFetchService;
 /**
  * A placeholder fragment containing a simple view.
  */
-public class MainScreenFragment extends Fragment implements LoaderManager.LoaderCallbacks<Cursor>
-{
+public class MainScreenFragment extends Fragment implements LoaderManager.LoaderCallbacks<Cursor> {
 
     private final String LOG_TAG = MainScreenFragment.class.getSimpleName();
 
@@ -34,8 +33,7 @@ public class MainScreenFragment extends Fragment implements LoaderManager.Loader
     private String[] fragmentdate = new String[1];
     private int lastSelectedItem = -1;
 
-    public MainScreenFragment()
-    {
+    public MainScreenFragment() {
 
     }
 
@@ -43,7 +41,6 @@ public class MainScreenFragment extends Fragment implements LoaderManager.Loader
     public void onInflate(Activity activity, AttributeSet attrs, Bundle savedInstanceState) {
         super.onInflate(activity, attrs, savedInstanceState);
 
-//        mChoiceMode = a.getInt(R.styleable.ForecastFragment_android_choiceMode, AbsListView.CHOICE_MODE_NONE);
         mChoiceMode = AbsListView.CHOICE_MODE_NONE;
     }
 
@@ -72,10 +69,6 @@ public class MainScreenFragment extends Fragment implements LoaderManager.Loader
         // Set the layout manager
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
-//        mRecyclerView.setHasFixedSize(true);
-
-//        mScoresAdapter = new ScoresAdapter(getActivity(), null, 0);
-
         // The ScoresAdapter will take data from a source and use it to populate the RecyclerView
         // it's attached to.
         mScoresAdapter = new ScoresAdapter(getActivity(), new ScoresAdapter.ScoresAdapterOnClickHandler() {
@@ -95,17 +88,6 @@ public class MainScreenFragment extends Fragment implements LoaderManager.Loader
         // specify an adapter.
         mRecyclerView.setAdapter(mScoresAdapter);
 
-//        scoreList.ScoresViewHolder(new AdapterView.OnItemClickListener() {
-//            @Override
-//            public void onItemClick(AdapterView<?> parent, View view, int position, long id)
-//            {
-//                ScoresViewHolder selected = (ScoresViewHolder) view.getTag();
-//                mScoresAdapter.detailMatchId = selected.matchId;
-//                MainActivity.selectedMatchId = (int) selected.matchId;
-//                mScoresAdapter.notifyDataSetChanged();
-//            }
-//        });
-
         return rootView;
     }
 
@@ -117,26 +99,14 @@ public class MainScreenFragment extends Fragment implements LoaderManager.Loader
 
     @Override
     public void onLoadFinished(Loader<Cursor> cursorLoader, Cursor cursor) {
-        //Log.v(FetchScoreTask.LOG_TAG,"loader finished");
-        //cursor.moveToFirst();
-        /*
-        while (!cursor.isAfterLast())
-        {
-            Log.v(FetchScoreTask.LOG_TAG,cursor.getString(1));
-            cursor.moveToNext();
-        }
-        */
-
         int i = 0;
         cursor.moveToFirst();
-        while (!cursor.isAfterLast())
-        {
+        while (!cursor.isAfterLast()) {
             i++;
             cursor.moveToNext();
         }
-        //Log.v(FetchScoreTask.LOG_TAG,"Loader query: " + String.valueOf(i));
+
         mScoresAdapter.swapCursor(cursor);
-        //mScoresAdapter.notifyDataSetChanged();
     }
 
     @Override

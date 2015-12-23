@@ -90,9 +90,6 @@ public class Utilities {
     }
 
     public static int getTeamCrestByTeamName (String teamname) {
-        Log.v(LOG_TAG, "===== getTeamCrestByTeamName()");
-        Log.v(LOG_TAG, "teamname: " + teamname);
-
         if (teamname == null) {
             return R.drawable.no_icon;
         }

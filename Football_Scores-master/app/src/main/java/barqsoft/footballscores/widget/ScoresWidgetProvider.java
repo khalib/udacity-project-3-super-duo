@@ -6,12 +6,10 @@ import android.appwidget.AppWidgetManager;
 import android.appwidget.AppWidgetProvider;
 import android.content.Context;
 import android.content.Intent;
-import android.database.Cursor;
 import android.os.Build;
 import android.support.annotation.NonNull;
 import android.support.v4.app.TaskStackBuilder;
 import android.util.Log;
-import android.view.View;
 import android.widget.RemoteViews;
 
 import barqsoft.footballscores.MainActivity;

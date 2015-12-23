@@ -87,15 +87,8 @@ public class ScoresProvider extends ContentProvider {
 
     @Override
     public Cursor query(Uri uri, String[] projection, String selection, String[] selectionArgs, String sortOrder) {
-        Log.v(LOG_TAG, "==== query()");
-
         Cursor retCursor;
         int match = matchUri(uri);
-
-        //Log.v(FetchScoreTask.LOG_TAG,uri.getPathSegments().toString());
-        //Log.v(FetchScoreTask.LOG_TAG,SCORES_BY_LEAGUE);
-        //Log.v(FetchScoreTask.LOG_TAG,selectionArgs[0]);
-        //Log.v(FetchScoreTask.LOG_TAG,String.valueOf(match));
 
         switch (match) {
             case MATCHES:

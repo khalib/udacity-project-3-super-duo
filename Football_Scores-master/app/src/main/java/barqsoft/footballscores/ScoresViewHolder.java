@@ -45,4 +45,5 @@ public class ScoresViewHolder extends RecyclerView.ViewHolder implements View.On
         Log.v(LOG_TAG, "ScoresViewHolder: CLICK");
         mOnClickHandler.onClick(Double.valueOf("12345"), this);
     }
+
 }
