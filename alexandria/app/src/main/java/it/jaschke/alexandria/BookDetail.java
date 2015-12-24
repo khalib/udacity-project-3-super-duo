@@ -36,24 +36,40 @@ public class BookDetail extends Fragment implements LoaderManager.LoaderCallback
     private String bookTitle;
     private ShareActionProvider shareActionProvider;
 
+    private static final int BOOK_LOADER = 0;
+
     public BookDetail() {
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
+        Log.v(LOG_TAG, "===== onCreate()");
+
         super.onCreate(savedInstanceState);
         setHasOptionsMenu(true);
     }
 
     @Override
     public View onCreateView(final LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        Bundle arguments = getArguments();
-        if (arguments != null) {
-            ean = arguments.getString(BookDetail.EAN_KEY);
-            getLoaderManager().restartLoader(LOADER_ID, null, this);
+        Log.v(LOG_TAG, "===== onCreateView()");
+
+        // Get the selected EAN.
+        Intent intent = getActivity().getIntent();
+        if (intent != null && intent.hasExtra(BookDetail.EAN_KEY)) {
+            // Get the EAN from the activity intent call.
+            ean = intent.getStringExtra(BookDetail.EAN_KEY);
+        } else {
+            // Get the EAN from the fragment arguments.
+            Bundle arguments = getArguments();
+            if (arguments != null) {
+                ean = arguments.getString(BookDetail.EAN_KEY);
+                getLoaderManager().restartLoader(LOADER_ID, null, this);
+            }
         }
 
         rootView = inflater.inflate(R.layout.fragment_full_book, container, false);
+
+        // Click handler for deleting a book.
         rootView.findViewById(R.id.delete_button).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -62,17 +78,23 @@ public class BookDetail extends Fragment implements LoaderManager.LoaderCallback
                 bookIntent.setAction(BookService.DELETE_BOOK);
                 getActivity().startService(bookIntent);
 
-                getActivity().getSupportFragmentManager().popBackStack();
-
                 Toast.makeText(getContext(), R.string.book_deleted, Toast.LENGTH_LONG).show();
+
+                if (Utility.isTablet(getActivity())) {
+                    getActivity().getSupportFragmentManager().popBackStack();
+                } else {
+                    getActivity().finish();
+                }
             }
         });
+
         return rootView;
     }
 
-
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        Log.v(LOG_TAG, "===== onCreateOptionsMenu()");
+
         inflater.inflate(R.menu.book_detail, menu);
 
         MenuItem menuItem = menu.findItem(R.id.action_share);
@@ -81,6 +103,8 @@ public class BookDetail extends Fragment implements LoaderManager.LoaderCallback
 
     @Override
     public android.support.v4.content.Loader<Cursor> onCreateLoader(int id, Bundle args) {
+        Log.v(LOG_TAG, "===== onCreateLoader()");
+
         return new CursorLoader(
                 getActivity(),
                 AlexandriaContract.BookEntry.buildFullBookUri(Long.parseLong(ean)),
@@ -92,7 +116,17 @@ public class BookDetail extends Fragment implements LoaderManager.LoaderCallback
     }
 
     @Override
+    public void onActivityCreated(Bundle savedInstanceState) {
+        Log.v(LOG_TAG, "===== onActivityCreated()");
+
+        getLoaderManager().initLoader(BOOK_LOADER, null, this);
+        super.onActivityCreated(savedInstanceState);
+    }
+
+    @Override
     public void onLoadFinished(android.support.v4.content.Loader<Cursor> loader, Cursor data) {
+        Log.v(LOG_TAG, "===== onLoadFinished()");
+
         if (!data.moveToFirst()) {
             return;
         }
@@ -146,19 +180,17 @@ public class BookDetail extends Fragment implements LoaderManager.LoaderCallback
 
         // Add content description to the book cover image.
         bookCover.setContentDescription(bookTitle);
-
-        if(rootView.findViewById(R.id.right_container)!=null){
-            rootView.findViewById(R.id.backButton).setVisibility(View.INVISIBLE);
-        }
     }
 
     @Override
     public void onLoaderReset(android.support.v4.content.Loader<Cursor> loader) {
-
+        Log.v(LOG_TAG, "===== onLoaderReset()");
     }
 
     @Override
     public void onPause() {
+        Log.v(LOG_TAG, "===== onPause()");
+
         super.onDestroyView();
         if(MainActivity.IS_TABLET && rootView.findViewById(R.id.right_container)==null){
             getActivity().getSupportFragmentManager().popBackStack();

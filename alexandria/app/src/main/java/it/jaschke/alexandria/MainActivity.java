@@ -42,7 +42,7 @@ public class MainActivity extends ActionBarActivity implements
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        IS_TABLET = isTablet();
+        IS_TABLET = Utility.isTablet(this);
         if (IS_TABLET) {
             setContentView(R.layout.activity_main_tablet);
         } else {
@@ -59,7 +59,7 @@ public class MainActivity extends ActionBarActivity implements
 
         // Set up the drawer.
         navigationDrawerFragment.setUp(R.id.navigation_drawer,
-                    (DrawerLayout) findViewById(R.id.drawer_layout));
+                (DrawerLayout) findViewById(R.id.drawer_layout));
     }
 
     @Override
@@ -133,21 +133,29 @@ public class MainActivity extends ActionBarActivity implements
 
     @Override
     public void onItemSelected(String ean) {
-        Bundle args = new Bundle();
-        args.putString(BookDetail.EAN_KEY, ean);
+        if (IS_TABLET) {
+            // Replace right container fragment for larger devices.
+            Bundle args = new Bundle();
+            args.putString(BookDetail.EAN_KEY, ean);
 
-        BookDetail fragment = new BookDetail();
-        fragment.setArguments(args);
+            BookDetail fragment = new BookDetail();
+            fragment.setArguments(args);
 
-        int id = R.id.container;
-        if(findViewById(R.id.right_container) != null){
-            id = R.id.right_container;
+            int id = R.id.container;
+            if (findViewById(R.id.right_container) != null){
+                id = R.id.right_container;
+            }
+
+            getSupportFragmentManager().beginTransaction()
+                    .replace(id, fragment)
+                    .addToBackStack("Book Detail")
+                    .commit();
+        } else {
+            // Start new activity for smaller devices.
+            Intent intent = new Intent(this, BookDetailActivity.class);
+            intent.putExtra(BookDetail.EAN_KEY, ean);
+            startActivity(intent);
         }
-        getSupportFragmentManager().beginTransaction()
-                .replace(id, fragment)
-                .addToBackStack("Book Detail")
-                .commit();
-
     }
 
     private class MessageReciever extends BroadcastReceiver {
@@ -157,16 +165,6 @@ public class MainActivity extends ActionBarActivity implements
                 Toast.makeText(MainActivity.this, intent.getStringExtra(MESSAGE_KEY), Toast.LENGTH_LONG).show();
             }
         }
-    }
-
-    public void goBack(View view){
-        getSupportFragmentManager().popBackStack();
-    }
-
-    private boolean isTablet() {
-        return (getApplicationContext().getResources().getConfiguration().screenLayout
-                & Configuration.SCREENLAYOUT_SIZE_MASK)
-                >= Configuration.SCREENLAYOUT_SIZE_LARGE;
     }
 
     @Override
