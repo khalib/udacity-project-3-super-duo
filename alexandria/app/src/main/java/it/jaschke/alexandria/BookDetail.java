@@ -43,16 +43,12 @@ public class BookDetail extends Fragment implements LoaderManager.LoaderCallback
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
-        Log.v(LOG_TAG, "===== onCreate()");
-
         super.onCreate(savedInstanceState);
         setHasOptionsMenu(true);
     }
 
     @Override
     public View onCreateView(final LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        Log.v(LOG_TAG, "===== onCreateView()");
-
         // Get the selected EAN.
         Intent intent = getActivity().getIntent();
         if (intent != null && intent.hasExtra(BookDetail.EAN_KEY)) {
@@ -93,8 +89,6 @@ public class BookDetail extends Fragment implements LoaderManager.LoaderCallback
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        Log.v(LOG_TAG, "===== onCreateOptionsMenu()");
-
         inflater.inflate(R.menu.book_detail, menu);
 
         MenuItem menuItem = menu.findItem(R.id.action_share);
@@ -103,8 +97,6 @@ public class BookDetail extends Fragment implements LoaderManager.LoaderCallback
 
     @Override
     public android.support.v4.content.Loader<Cursor> onCreateLoader(int id, Bundle args) {
-        Log.v(LOG_TAG, "===== onCreateLoader()");
-
         return new CursorLoader(
                 getActivity(),
                 AlexandriaContract.BookEntry.buildFullBookUri(Long.parseLong(ean)),
@@ -117,16 +109,12 @@ public class BookDetail extends Fragment implements LoaderManager.LoaderCallback
 
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
-        Log.v(LOG_TAG, "===== onActivityCreated()");
-
         getLoaderManager().initLoader(BOOK_LOADER, null, this);
         super.onActivityCreated(savedInstanceState);
     }
 
     @Override
     public void onLoadFinished(android.support.v4.content.Loader<Cursor> loader, Cursor data) {
-        Log.v(LOG_TAG, "===== onLoadFinished()");
-
         if (!data.moveToFirst()) {
             return;
         }
@@ -184,13 +172,11 @@ public class BookDetail extends Fragment implements LoaderManager.LoaderCallback
 
     @Override
     public void onLoaderReset(android.support.v4.content.Loader<Cursor> loader) {
-        Log.v(LOG_TAG, "===== onLoaderReset()");
+
     }
 
     @Override
     public void onPause() {
-        Log.v(LOG_TAG, "===== onPause()");
-
         super.onDestroyView();
         if(MainActivity.IS_TABLET && rootView.findViewById(R.id.right_container)==null){
             getActivity().getSupportFragmentManager().popBackStack();
