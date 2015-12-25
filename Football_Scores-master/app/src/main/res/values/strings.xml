@@ -1,23 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:xliff="http://schemas.android.com/apk/res-auto">
     <string name="app_name">Football Scores</string>
-    <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
     <string name="test_text">Test</string>
     <string name="today">Today</string>
     <string name="yesterday">Yesterday</string>
     <string name="tomorrow">Tomorrow</string>
-    <string name="champions_league">UEFA Champions League</string>
-    <string name="bundesliga">Bundesliga</string>
-    <string name="premierleague">Premier League</string>
-    <string name="primeradivison">Primera Division</string>
-    <string name="seriaa">Serie A</string>
     <string name="matchday_text">Match day</string>
-    <string name="group_stage_text">Group stages</string>
-    <string name="first_knockout_round">First knockout round</string>
-    <string name="quarter_final">Quarter Final</string>
-    <string name="semi_final">Semi Final</string>
-    <string name="final_text">Final</string>
     <string name="about">About</string>
     <string name="title_activity_about">AboutActivity</string>
     <string name="empty_scores_list">No scores for this day.</string>
@@ -36,6 +25,29 @@
     <string name="dummy_data" translatable="false">{\"timeFrameStart\":\"2015-06-18\",\"timeFrameEnd\":\"2015-06-19\",\"count\":1,\"fixtures\":[{\"_links\":{\"self\":{\"href\":\"http://api.football-data.org/alpha/fixtures/140514\"},\"soccerseason\":{\"href\":\"http://api.football-data.org/alpha/soccerseasons/357\"},\"homeTeam\":{\"href\":\"http://api.football-data.org/alpha/teams/275\"},\"awayTeam\":{\"href\":\"http://api.football-data.org/alpha/teams/263\"}},\"date\":\"2015-06-19T22:00:00Z\",\"status\":\"FINISHED\",\"matchday\":42,\"homeTeamName\":\"TESTING1\",\"awayTeamName\":\"TESTING2\",\"result\":{\"goalsHomeTeam\":2,\"goalsAwayTeam\":4}},{\"_links\":{\"self\":{\"href\":\"http://api.football-data.org/alpha/fixtures/140514\"},\"soccerseason\":{\"href\":\"http://api.football-data.org/alpha/soccerseasons/357\"},\"homeTeam\":{\"href\":\"http://api.football-data.org/alpha/teams/275\"},\"awayTeam\":{\"href\":\"http://api.football-data.org/alpha/teams/263\"}},\"date\":\"2015-06-19T22:00:00Z\",\"status\":\"FINISHED\",\"matchday\":42,\"homeTeamName\":\"TESTING1\",\"awayTeamName\":\"TESTING2\",\"result\":{\"goalsHomeTeam\":2,\"goalsAwayTeam\":4}},{\"_links\":{\"self\":{\"href\":\"http://api.football-data.org/alpha/fixtures/140514\"},\"soccerseason\":{\"href\":\"http://api.football-data.org/alpha/soccerseasons/357\"},\"homeTeam\":{\"href\":\"http://api.football-data.org/alpha/teams/275\"},\"awayTeam\":{\"href\":\"http://api.football-data.org/alpha/teams/263\"}},\"date\":\"2015-06-19T22:00:00Z\",\"status\":\"FINISHED\",\"matchday\":42,\"homeTeamName\":\"TESTING1\",\"awayTeamName\":\"TESTING2\",\"result\":{\"goalsHomeTeam\":2,\"goalsAwayTeam\":4}},{\"_links\":{\"self\":{\"href\":\"http://api.football-data.org/alpha/fixtures/140514\"},\"soccerseason\":{\"href\":\"http://api.football-data.org/alpha/soccerseasons/357\"},\"homeTeam\":{\"href\":\"http://api.football-data.org/alpha/teams/275\"},\"awayTeam\":{\"href\":\"http://api.football-data.org/alpha/teams/263\"}},\"date\":\"2015-06-19T22:00:00Z\",\"status\":\"FINISHED\",\"matchday\":42,\"homeTeamName\":\"TESTING1\",\"awayTeamName\":\"TESTING2\",\"result\":{\"goalsHomeTeam\":2,\"goalsAwayTeam\":4}},{\"_links\":{\"self\":{\"href\":\"http://api.football-data.org/alpha/fixtures/140514\"},\"soccerseason\":{\"href\":\"http://api.football-data.org/alpha/soccerseasons/357\"},\"homeTeam\":{\"href\":\"http://api.football-data.org/alpha/teams/275\"},\"awayTeam\":{\"href\":\"http://api.football-data.org/alpha/teams/263\"}},\"date\":\"2015-06-19T22:00:00Z\",\"status\":\"FINISHED\",\"matchday\":42,\"homeTeamName\":\"TESTING1\",\"awayTeamName\":\"TESTING2\",\"result\":{\"goalsHomeTeam\":2,\"goalsAwayTeam\":4}}]}</string>
     <string name="network_connection_error">No internet connection available. Please try again later.</string>
 
+    <!-- League Names -->
+    <string name="league_seria_a">Seria A</string>
+    <string name="league_premier_league">Premier League</string>
+    <string name="league_uefa_champions_league">UEFA Champions League</string>
+    <string name="league_primera_division">Primera Division</string>
+    <string name="league_bundesliga_1">Bundesliga 1</string>
+    <string name="league_bundesliga_2">Bundesliga 2</string>
+    <string name="league_bundesliga_3">Bundesliga 3</string>
+    <string name="league_segunda_division">Segunda Division</string>
+    <string name="league_france_ligue_1">France Ligue 1</string>
+    <string name="league_france_ligue_2">France Ligue 2</string>
+    <string name="league_liga_bbva">Liga BBVA</string>
+    <string name="league_eredivisie">Eredivisie</string>
+    <string name="league_not_found">Not known League Please report</string>
+
+    <!-- League Matches -->
+    <string name="league_match_day_group_stages">Group Stages, Matchday : 6</string>
+    <string name="league_match_day_first_knockout_round">First Knockout round</string>
+    <string name="league_match_day_querter_final">Quarter Final</string>
+    <string name="league_match_day_semi_final">Semi Final</string>
+    <string name="league_match_day_final">Final</string>
+    <string name="league_match_day_default">Matchday: <xliff:g id="match">%1$s</xliff:g></string>
+
     <!-- Shares -->
     <string name="share_text">Share</string>
     <string name="share_message"><xliff:g id="homeTeam">%1$s</xliff:g> <xliff:g id="score">%2$s</xliff:g> <xliff:g id="awayTeam">%3$s</xliff:g> #Football_Scores</string>
@@ -47,4 +59,8 @@
 
     <!-- Widgets -->
     <string name="widget_title_collection">Today\'s Scores</string>
+
+    <!-- Errors -->
+    <string name="exception_not_bound_by_recyclerview">Not bound by RecyclerView</string>
+    <string name="exception_unknown_uri">Unknown uri: <xliff:g id="uri">%1$s</xliff:g></string>
 </resources>

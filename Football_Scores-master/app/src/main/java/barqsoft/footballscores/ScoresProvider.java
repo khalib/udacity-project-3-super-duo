@@ -81,7 +81,7 @@ public class ScoresProvider extends ContentProvider {
             case MATCHES_WITH_DATE:
                 return DatabaseContract.ScoreEntry.CONTENT_TYPE;
             default:
-                throw new UnsupportedOperationException("Unknown uri :" + uri );
+                throw new UnsupportedOperationException(String.format(getContext().getString(R.string.exception_unknown_uri), uri));
         }
     }
 
@@ -134,7 +134,7 @@ public class ScoresProvider extends ContentProvider {
                         sortOrder);
                 break;
             default:
-                throw new UnsupportedOperationException("Unknown Uri" + uri);
+                throw new UnsupportedOperationException(String.format(getContext().getString(R.string.exception_unknown_uri), uri));
         }
 
         retCursor.setNotificationUri(getContext().getContentResolver(), uri);

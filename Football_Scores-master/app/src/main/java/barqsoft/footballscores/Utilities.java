@@ -20,64 +20,64 @@ public class Utilities {
      * @param leagueNum
      * @return
      */
-    public static String getLeague(int leagueNum) {
+    public static String getLeague(Context context, int leagueNum) {
         switch (leagueNum) {
             case ScoresFetchService.SERIE_A:
-                return "Seria A";
+                return context.getString(R.string.league_seria_a);
 
             case ScoresFetchService.PREMIER_LEAGUE:
-                return "Premier League";
+                return context.getString(R.string.league_premier_league);
 
             case ScoresFetchService.CHAMPIONS_LEAGUE:
-                return "UEFA Champions League";
+                return context.getString(R.string.league_uefa_champions_league);
 
             case ScoresFetchService.PRIMERA_DIVISION:
-                return "Primera Division";
+                return context.getString(R.string.league_primera_division);
 
             case ScoresFetchService.BUNDESLIGA1:
-                return "Bundesliga 1";
+                return context.getString(R.string.league_bundesliga_1);
 
             case ScoresFetchService.BUNDESLIGA2:
-                return "Bundesliga 2";
+                return context.getString(R.string.league_bundesliga_2);
 
             case ScoresFetchService.BUNDESLIGA3:
-                return "Bundesliga 3";
+                return context.getString(R.string.league_bundesliga_3);
 
             case ScoresFetchService.SEGUNDA_DIVISION:
-                return "Segunda Division";
+                return context.getString(R.string.league_segunda_division);
 
             case ScoresFetchService.LIGUE1:
-                return "France Ligue 1";
+                return context.getString(R.string.league_france_ligue_1);
 
             case ScoresFetchService.LIGUE2:
-                return "France Ligue 2";
+                return context.getString(R.string.league_france_ligue_2);
 
             case ScoresFetchService.PRIMERA_LIGA:
-                return "Liga BBVA";
+                return context.getString(R.string.league_liga_bbva);
 
             case ScoresFetchService.EREDIVISIE:
-                return "Eredivisie";
+                return context.getString(R.string.league_eredivisie);
 
             default:
-                return "Not known League Please report";
+                return context.getString(R.string.league_not_found);
         }
     }
 
-    public static String getMatchDay(int match_day,int leagueNum) {
+    public static String getMatchDay(Context context, int match_day,int leagueNum) {
         if (leagueNum == ScoresFetchService.CHAMPIONS_LEAGUE) {
             if (match_day <= 6) {
-                return "Group Stages, Matchday : 6";
+                return context.getString(R.string.league_match_day_group_stages);
             } else if (match_day == 7 || match_day == 8) {
-                return "First Knockout round";
+                return context.getString(R.string.league_match_day_first_knockout_round);
             } else if (match_day == 9 || match_day == 10) {
-                return "QuarterFinal";
+                return context.getString(R.string.league_match_day_querter_final);
             } else if(match_day == 11 || match_day == 12) {
-                return "SemiFinal";
+                return context.getString(R.string.league_match_day_semi_final);
             } else {
-                return "Final";
+                return context.getString(R.string.league_match_day_final);
             }
         } else {
-            return "Matchday : " + String.valueOf(match_day);
+            return String.format(context.getString(R.string.league_match_day_default), String.valueOf(match_day));
         }
     }
 
