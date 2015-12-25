@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>
+<resources xmlns:xliff="http://schemas.android.com/apk/res-auto">
     <string name="app_name">Alexandria</string>
 
     <!-- Menu Items -->
@@ -28,7 +28,7 @@
     <string name="title_activity_barcode_reader">Barcode Reader</string>
     <string name="action_share">Share</string>
     <string name="back_button">go back</string>
-    <string name="share_text">A must read book: </string>
+    <string name="share_text">A must read book: <xliff:g id="bookTitle">%1$s</xliff:g></string>
 
     <string name="camera_permission_error">Access to the camera is needed for detection</string>
     <string name="low_storage_error">Barcode scanner cannot be downloaded due to low device storage</string>

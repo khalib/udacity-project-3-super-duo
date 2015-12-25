@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.CursorLoader;
+import android.support.v4.content.Loader;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v7.widget.ShareActionProvider;
 import android.util.Log;
@@ -36,6 +37,8 @@ public class BookDetail extends Fragment implements LoaderManager.LoaderCallback
     private String bookTitle;
     private ShareActionProvider shareActionProvider;
 
+    private static final int BOOK_LOADER = 0;
+
     public BookDetail() {
     }
 
@@ -47,13 +50,23 @@ public class BookDetail extends Fragment implements LoaderManager.LoaderCallback
 
     @Override
     public View onCreateView(final LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        Bundle arguments = getArguments();
-        if (arguments != null) {
-            ean = arguments.getString(BookDetail.EAN_KEY);
-            getLoaderManager().restartLoader(LOADER_ID, null, this);
+        // Get the selected EAN.
+        Intent intent = getActivity().getIntent();
+        if (intent != null && intent.hasExtra(BookDetail.EAN_KEY)) {
+            // Get the EAN from the activity intent call.
+            ean = intent.getStringExtra(BookDetail.EAN_KEY);
+        } else {
+            // Get the EAN from the fragment arguments.
+            Bundle arguments = getArguments();
+            if (arguments != null) {
+                ean = arguments.getString(BookDetail.EAN_KEY);
+                getLoaderManager().restartLoader(LOADER_ID, null, this);
+            }
         }
 
         rootView = inflater.inflate(R.layout.fragment_full_book, container, false);
+
+        // Click handler for deleting a book.
         rootView.findViewById(R.id.delete_button).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -62,14 +75,18 @@ public class BookDetail extends Fragment implements LoaderManager.LoaderCallback
                 bookIntent.setAction(BookService.DELETE_BOOK);
                 getActivity().startService(bookIntent);
 
-                getActivity().getSupportFragmentManager().popBackStack();
-
                 Toast.makeText(getContext(), R.string.book_deleted, Toast.LENGTH_LONG).show();
+
+                if (Utility.isTablet(getActivity())) {
+                    getActivity().getSupportFragmentManager().popBackStack();
+                } else {
+                    getActivity().finish();
+                }
             }
         });
+
         return rootView;
     }
-
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
@@ -77,10 +94,15 @@ public class BookDetail extends Fragment implements LoaderManager.LoaderCallback
 
         MenuItem menuItem = menu.findItem(R.id.action_share);
         shareActionProvider = (ShareActionProvider) MenuItemCompat.getActionProvider(menuItem);
+
+        // Set share intent if the book data is loaded.
+        if (bookTitle != null) {
+            shareActionProvider.setShareIntent(createShareBookIntent());
+        }
     }
 
     @Override
-    public android.support.v4.content.Loader<Cursor> onCreateLoader(int id, Bundle args) {
+    public Loader<Cursor> onCreateLoader(int id, Bundle args) {
         return new CursorLoader(
                 getActivity(),
                 AlexandriaContract.BookEntry.buildFullBookUri(Long.parseLong(ean)),
@@ -92,7 +114,13 @@ public class BookDetail extends Fragment implements LoaderManager.LoaderCallback
     }
 
     @Override
-    public void onLoadFinished(android.support.v4.content.Loader<Cursor> loader, Cursor data) {
+    public void onActivityCreated(Bundle savedInstanceState) {
+        getLoaderManager().initLoader(BOOK_LOADER, null, this);
+        super.onActivityCreated(savedInstanceState);
+    }
+
+    @Override
+    public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
         if (!data.moveToFirst()) {
             return;
         }
@@ -100,14 +128,9 @@ public class BookDetail extends Fragment implements LoaderManager.LoaderCallback
         bookTitle = data.getString(data.getColumnIndex(AlexandriaContract.BookEntry.TITLE));
         ((TextView) rootView.findViewById(R.id.fullBookTitle)).setText(bookTitle);
 
-        Intent shareIntent = new Intent(Intent.ACTION_SEND);
-        shareIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_DOCUMENT);
-        shareIntent.setType("text/plain");
-        shareIntent.putExtra(Intent.EXTRA_TEXT, getString(R.string.share_text) + bookTitle);
-
         // Update the share intent if created by onCreateOptionsMenu().
         if (shareActionProvider != null) {
-            shareActionProvider.setShareIntent(shareIntent);
+            shareActionProvider.setShareIntent(createShareBookIntent());
         }
 
         String bookSubTitle = data.getString(data.getColumnIndex(AlexandriaContract.BookEntry.SUBTITLE));
@@ -146,10 +169,6 @@ public class BookDetail extends Fragment implements LoaderManager.LoaderCallback
 
         // Add content description to the book cover image.
         bookCover.setContentDescription(bookTitle);
-
-        if(rootView.findViewById(R.id.right_container)!=null){
-            rootView.findViewById(R.id.backButton).setVisibility(View.INVISIBLE);
-        }
     }
 
     @Override
@@ -163,5 +182,21 @@ public class BookDetail extends Fragment implements LoaderManager.LoaderCallback
         if(MainActivity.IS_TABLET && rootView.findViewById(R.id.right_container)==null){
             getActivity().getSupportFragmentManager().popBackStack();
         }
+    }
+
+    /**
+     * Creates the share intent for sharing the current book being viewed.
+     *
+     * @return the constructed shared intent.
+     */
+    private Intent createShareBookIntent() {
+        String shareText = String.format(getString(R.string.share_text), bookTitle);
+
+        Intent shareIntent = new Intent(Intent.ACTION_SEND);
+        shareIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_DOCUMENT);
+        shareIntent.setType("text/plain");
+        shareIntent.putExtra(Intent.EXTRA_TEXT, shareText);
+
+        return shareIntent;
     }
 }
