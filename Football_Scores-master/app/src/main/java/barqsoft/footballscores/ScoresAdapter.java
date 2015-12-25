@@ -54,7 +54,7 @@ public class ScoresAdapter extends RecyclerView.Adapter<ScoresViewHolder> {
 
             return new ScoresViewHolder(view, mClickHandler);
         } else {
-            throw new RuntimeException("Not bound by RecyclerView");
+            throw new RuntimeException(mContext.getString(R.string.exception_not_bound_by_recyclerview));
         }
     }
 
@@ -89,7 +89,7 @@ public class ScoresAdapter extends RecyclerView.Adapter<ScoresViewHolder> {
                     ViewGroup.LayoutParams.MATCH_PARENT));
 
             TextView matchDay = (TextView) v.findViewById(R.id.matchday_textview);
-            matchDay.setText(Utilities.getMatchDay(mCursor.getInt(COL_MATCHDAY),
+            matchDay.setText(Utilities.getMatchDay(mContext, mCursor.getInt(COL_MATCHDAY),
                     mCursor.getInt(COL_LEAGUE)));
 
             TextView league = (TextView) v.findViewById(R.id.league_textview);

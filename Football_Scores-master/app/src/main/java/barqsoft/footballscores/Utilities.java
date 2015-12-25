@@ -63,21 +63,21 @@ public class Utilities {
         }
     }
 
-    public static String getMatchDay(int match_day,int leagueNum) {
+    public static String getMatchDay(Context context, int match_day,int leagueNum) {
         if (leagueNum == ScoresFetchService.CHAMPIONS_LEAGUE) {
             if (match_day <= 6) {
-                return "Group Stages, Matchday : 6";
+                return context.getString(R.string.league_match_day_group_stages);
             } else if (match_day == 7 || match_day == 8) {
-                return "First Knockout round";
+                return context.getString(R.string.league_match_day_first_knockout_round);
             } else if (match_day == 9 || match_day == 10) {
-                return "QuarterFinal";
+                return context.getString(R.string.league_match_day_querter_final);
             } else if(match_day == 11 || match_day == 12) {
-                return "SemiFinal";
+                return context.getString(R.string.league_match_day_semi_final);
             } else {
-                return "Final";
+                return context.getString(R.string.league_match_day_final);
             }
         } else {
-            return "Matchday : " + String.valueOf(match_day);
+            return String.format(context.getString(R.string.league_match_day_default), String.valueOf(match_day));
         }
     }
 
