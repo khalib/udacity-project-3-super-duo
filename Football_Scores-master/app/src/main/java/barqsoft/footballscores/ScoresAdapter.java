@@ -93,7 +93,7 @@ public class ScoresAdapter extends RecyclerView.Adapter<ScoresViewHolder> {
                     mCursor.getInt(COL_LEAGUE)));
 
             TextView league = (TextView) v.findViewById(R.id.league_textview);
-            league.setText(Utilities.getLeague(mCursor.getInt(COL_LEAGUE)));
+            league.setText(Utilities.getLeague(mContext, mCursor.getInt(COL_LEAGUE)));
 
             Button shareButton = (Button) v.findViewById(R.id.share_button);
             shareButton.setContentDescription(mContext.getString(R.string.a11y_share_button));
